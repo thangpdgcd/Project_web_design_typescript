@@ -1,0 +1,62 @@
+.guide-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  color: #000;
+
+  section {
+    margin-bottom: 48px;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 15px;
+    margin: 8px 0;
+  }
+
+  code {
+    font-family: Consolas, monospace;
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #c7254e;
+  }
+
+  .code-block {
+    background-color: #f4f4f4;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 8px;
+    overflow-x: auto;
+
+    code {
+      display: block;
+      white-space: pre;
+      color: #000;
+      background: none;
+      padding: 0;
+    }
+  }
+
+  a {
+    color: #0078d4;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
