@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+* {
+  line-height: 1.4; // hoặc 1.5 là mức tiêu chuẩn đẹp mắt
+}
+h1,
+h2,
+h3,
+p,
+span,
+div {
+  line-height: 1.5;
+}
+body {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5; // hoặc 24px nếu bạn dùng px
+}

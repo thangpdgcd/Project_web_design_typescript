@@ -1,0 +1,55 @@
+.sidebar {
+  overflow: auto;
+  height: 100vh !important;
+  position: sticky;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+
+  .img-sidebar {
+  }
+
+  .search {
+    display: flex !important;
+    justify-content: start !important;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+
+    .iconsearch {
+      position: absolute;
+      width: 13px;
+      margin-left: 10px;
+      color: grey !important; // T
+      line-height: 1.5;
+    }
+  }
+  .search input {
+    border: 1px solid rgb(219, 213, 213);
+    height: 20px;
+    color: grey;
+    border-radius: 30px;
+    outline: none;
+    opacity: 1;
+    padding: 10px 30px;
+    width: 190px;
+    height: 30px;
+  }
+  .search input::placeholder {
+    display: flex;
+  }
+}
+
+//ant-design-scss
+.submenu-title {
+  float: left;
+  font-size: 16px; // Thay đổi kích thước chữ theo ý muốn
+  // Để làm cho tiêu đề đậm hơn
+}
+.menu-sidebar {
+  font-weight: bold;
+  padding-left: 0; // bỏ padding trái
+  margin-left: 0; // bỏ margin trái nếu có
+  padding-right: 16px; // giữ khoảng cách phải nếu cần
+  cursor: pointer;
+}
