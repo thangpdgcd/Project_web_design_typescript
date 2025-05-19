@@ -30,7 +30,7 @@ const QuickStart = () => {
 
           <h3>React 18</h3>
           <div className='code-block'>
-            <code>{`import React from "react";
+            <code>{`"import" React from "react";
 import { createRoot } from "react-dom/client";
 import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 import App from "./App";

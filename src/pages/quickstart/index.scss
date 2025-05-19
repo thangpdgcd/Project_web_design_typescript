@@ -1,7 +1,6 @@
 .guide-container {
-  max-width: 800px;
   margin: 0 auto;
-  padding: 40px;
+  margin-top: 60px;
   font-family: Arial, sans-serif;
   color: #000;
 
@@ -29,10 +28,11 @@
 
   code {
     font-family: Consolas, monospace;
-    background-color: #f4f4f4;
+    background-color: #e4e2e2;
     padding: 2px 4px;
     border-radius: 4px;
-    color: #c7254e;
+    color: #494848;
+    border: 1px solid #e9e6e6;
   }
 
   .code-block {
@@ -41,11 +41,12 @@
     padding: 12px;
     margin-top: 8px;
     overflow-x: auto;
+    border: 1px solid #dad6d6;
 
     code {
       display: block;
       white-space: pre;
-      color: #000;
+      color: rgb(69, 67, 67);
       background: none;
       padding: 0;
     }

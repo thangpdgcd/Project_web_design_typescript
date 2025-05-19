@@ -50,6 +50,27 @@
   font-weight: bold;
   padding-left: 0; // bỏ padding trái
   margin-left: 0; // bỏ margin trái nếu có
-  padding-right: 16px; // giữ khoảng cách phải nếu cần
+  // giữ khoảng cách phải nếu cần
   cursor: pointer;
+  &:hover {
+    background-color: #f0f2f5 !important; // Thay đổi màu nền khi hover
+  }
+  .ant-menu-item-selected {
+    background-color: #f0f2f5 !important; // Thay đổi màu nền khi chọn
+  }
+  .ant-menu-item {
+    padding: 0 !important; // Bỏ padding
+    margin: 0 !important; // Bỏ margin
+  }
+  .ant-menu-submenu-title {
+    padding: 0 !important; // Bỏ padding
+    margin: 0 !important; // Bỏ margin
+  }
+  .ant-menu-submenu-arrow {
+    display: none !important; // Ẩn mũi tên
+  }
+  .ant-menu-submenu {
+    padding: 0 !important; // Bỏ padding
+    margin: 0 !important; // Bỏ margin
+  }
 }

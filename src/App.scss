@@ -11,10 +11,11 @@
 
 /* content-container: Content bên phải */
 .content-container {
-  margin-left: 100px;
+  padding: 5px;
+  margin-left: 40px;
   overflow-y: auto;
   overflow-x: auto;
-  width: 900px; /* Chiều rộng của content */
+  /* Chiều rộng của content */
   /* Khoảng cách giữa sidebar và content */
 }
 

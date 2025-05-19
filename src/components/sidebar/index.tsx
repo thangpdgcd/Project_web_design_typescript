@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
               {/* Introduction */}
               <SubMenu
                 key='sub1'
-                // icon={<DownOutlined />}
+                icon={<DownOutlined />}
                 title={<span className='submenu-title'>Concepts</span>}>
                 {/* B */}
                 <Menu.Item

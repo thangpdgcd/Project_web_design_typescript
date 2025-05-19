@@ -2,15 +2,11 @@
   scrollbar-width: thin;
   scrollbar-gutter: stable;
   overflow-x: auto;
-  overflow-y: auto;
 
   .header {
     .name {
       font-size: 40px;
       font-weight: bold;
-      text-align: center;
-      float: left;
-      justify-content: start;
     }
 
     .version {
@@ -18,29 +14,23 @@
       font-size: 25px;
       font-weight: bold;
       height: 40px;
-      margin-top: 52px;
-      text-align: justify;
     }
     .content {
       font-size: 20px;
       font-weight: bold;
       padding-left: 180px;
       padding-top: 20px;
-      overflow-y: auto;
+
       overflow-x: auto;
       align-items: center;
     }
   }
 }
 .banner {
-  height: 1000px;
-  width: 1000px;
   background-size: cover;
   background-position: center;
 }
 .img-banner {
-  width: 1000px;
-  height: 900px;
 }
 .banner-content {
   padding-top: 100px;
