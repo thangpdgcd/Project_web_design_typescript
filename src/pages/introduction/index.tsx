@@ -14,7 +14,7 @@ const Introduction = () => {
       <div className='introduction-container'>
         <div className='header'>
           <p className='name'>Fluent UI React Components</p>
-          <p className='version'>v9.63.0</p>
+          <p className='version'>v9.64.0</p>
         </div>
 
         <div className='content'>
@@ -44,29 +44,30 @@ const Introduction = () => {
               @fluentui/react-northstar.
             </p>
             <br />
-            <p>
+            <p className='overview-content'>
               Each component is designed to adhere to the following standards:
             </p>
             <ul>
               <li>
-                <strong>Customizable:</strong> Fluent-styled components by
-                default, but easy to integrate your own brand and theme
+                <strong>Customizable:</strong> Components styled with Fluent UI
+                by default, but easy to customize with your own brand and theme.
               </li>
               <li>
-                <strong>Performance:</strong> Optimized for render performance
+                <strong>Performance:</strong> Optimized for high rendering
+                performance.
               </li>
               <li>
-                <strong>Bundle size:</strong> Refactored and slimmed down
-                components that allow you to include the packages and
-                dependencies you need
+                <strong>Bundle Size:</strong> Refactored and lightweight
+                components that include only the packages and dependencies you
+                need.
               </li>
               <li>
-                <strong>Accessibility:</strong> WCAG 2.1 compliant and tested by
-                trusted testers
+                <strong>Accessibility:</strong> Compliant with WCAG 2.1 and
+                tested by trusted accessibility experts.
               </li>
               <li>
-                <strong>Design to Code:</strong> Stay up to date with Fluent
-                Design Language changes via Design Tokens
+                <strong>Design to Code:</strong> Stay aligned with Fluent Design
+                Language updates through Design Tokens.
               </li>
             </ul>
           </div>

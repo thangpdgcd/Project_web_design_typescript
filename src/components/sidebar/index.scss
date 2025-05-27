@@ -1,11 +1,13 @@
 .sidebar {
-  overflow: auto;
+  overflow-x: auto;
   height: 100vh !important;
   position: sticky;
   inset-inline-start: 0;
   top: 0;
   bottom: 0;
-
+  .div-header {
+    padding: 20px;
+  }
   .search {
     display: flex !important;
     justify-content: start !important;
@@ -29,7 +31,7 @@
     outline: none;
     opacity: 1;
     padding: 10px 30px;
-    width: 190px;
+    width: 300px;
     height: 30px;
   }
   .search input::placeholder {

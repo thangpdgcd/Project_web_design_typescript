@@ -25,13 +25,38 @@ import StrokeWidths from "../../pages/stroke_widths/stroke_widths";
 import Stypography from "../../pages/stypography/stypography";
 import ThemeDesigner from "../../pages/themedesigners/themedesigners";
 import React, { useState } from "react"; // Import React and useState hook
+
 // Adjust the path to your search icon file
 interface SidebarProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<React.ComponentType>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
+  //Fields search
+  let Sidebar = ([] = [
+    {
+      text: "Introduction",
+      link: "/introduction",
+    },
+    {
+      text: "Concepts",
+      link: "/concepts",
+    },
+    {
+      text: "Components",
+      link: "/components",
+    },
+  ]);
+
+  const searchSidebar = () => {
+    Sidebar.filter((item) => {
+      console.log(item.link);
+      return item.link && item.link.startsWith("/");
+    });
+  };
+
   const [isOpen, setIsOpen] = useState(false); // State to manage the open/close status of the submenu
+
   const [openKeys, setOpenKeys] = useState<{ [key: string]: boolean }>({
     sub1: false,
     sub1_1: false, //developer
@@ -39,25 +64,34 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     sub1_2: false, //migrations
     sub3: false,
     sub3_1: false, //recipes
+    sub1_1_2: false, //server-side rendering
   });
+
   const handleToggle = (key: string) => {
     setOpenKeys((prev) => ({
       ...prev,
       [key]: !prev[key],
     }));
   };
+
   return (
     <BrowserRouter>
       <Layout style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
-        <Layout.Sider width={220} theme='light' className='sidebar'>
-          <div className='img-sidebar' style={{}}>
-            <Image width={150} style={{}} src={logo}></Image>
+        <Layout.Sider width={280} theme='light' className='sidebar'>
+          <div className='div-header'>
+            <div className='img-sidebar' style={{}}>
+              <Image width={150} style={{}} src={logo}></Image>
+            </div>
+            <div className='search'>
+              <img src={iconsearch} alt='search' className='iconsearch' />
+              <input
+                onChange={(e) => searchSidebar()}
+                type='text'
+                placeholder='Find Component...'
+              />
+            </div>
           </div>
-          <div className='search'>
-            <img src={iconsearch} alt='search' className='iconsearch' />
-            <input type='text' placeholder='Find Component...' style={{}} />
-          </div>
-          <div className='menu-sidebar' style={{ marginTop: "20px" }}>
+          <div className='menu-sidebar'>
             <Menu mode='inline' theme='light' defaultSelectedKeys={["1"]}>
               {/* Introduction */}
               <SubMenu
@@ -78,12 +112,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
               >
                 {/* B */}
                 <Menu.Item
-                  style={{
-                    paddingLeft: "20px",
-                    marginLeft: "10px",
-                    marginRight: "10px",
-                  }}
-                  className='ant-menu-title-content'
+                  className='ant-menu-title-content pl-[20px] ml-[10px] mr-[10px]'
                   key='introduction'
                   onClick={() => setCurrentPage(() => Introduction)}
                   icon={<FileTextOutlined />}>
@@ -126,8 +155,16 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                   </Menu.Item>
                   <SubMenu
                     key='sub1-1-2'
-                    icon={<FolderOpenOutlined />}
-                    title='Server-Side Rendering'>
+                    title={
+                      <span className='submenu-title-child flex p-10 items-center gap-3'>
+                        <span
+                          className={`toggle ${
+                            openKeys.sub1_1_2 ? "open" : ""
+                          }`}></span>
+                        <FolderOpenOutlined className='folderopenoutlined' />
+                        Server-Side Rendering
+                      </span>
+                    }>
                     <Menu.Item key='5' icon={<FileTextOutlined />}>
                       <Link
                         to='/basic'
@@ -335,7 +372,8 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                   </Menu.Item>
                 </SubMenu>
               </SubMenu>
-            </Menu>
+            </Menu>{" "}
+            //đặt điều kiện menu
           </div>
         </Layout.Sider>
       </Layout>
