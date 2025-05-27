@@ -6,9 +6,6 @@
   top: 0;
   bottom: 0;
 
-  .img-sidebar {
-  }
-
   .search {
     display: flex !important;
     justify-content: start !important;
@@ -40,16 +37,122 @@
   }
 }
 
+.toggle {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid rgba(92, 104, 112, 0.6);
+  margin-right: 6px;
+  transition: transform 0.3s ease;
+  margin-left: 5px;
+  &.open {
+    transform: rotate(90deg);
+  }
+}
+.ant-menu-submenu-arrow {
+  display: none;
+}
+
 //ant-design-scss
 .submenu-title {
   float: left;
-  font-size: 16px; // Thay đổi kích thước chữ theo ý muốn
+  font-size: 15px; // Thay đổi kích thước chữ theo ý muốn
   // Để làm cho tiêu đề đậm hơn
 }
+.submenu-title {
+  display: flex;
+  align-items: center; // căn giữa mũi tên và chữ
+  gap: 4px; // khoảng cách giữa mũi tên và chữ
+}
 .menu-sidebar {
-  font-weight: bold;
-  padding-left: 0; // bỏ padding trái
-  margin-left: 0; // bỏ margin trái nếu có
-  padding-right: 16px; // giữ khoảng cách phải nếu cần
+  text-decoration: none;
+  margin-left: 0% !important;
+}
+.menu-item {
+  list-style: none; // loại bỏ dấu chấm (•)
+  padding-left: 0; // loại bỏ thụt trái
+  margin: 0;
+}
+.ant-menu {
+  padding: 0% !important; // Đảm bảo không có padding thừa
+  margin-left: 0% !important; // Đảm bảo không có margin thừa
+}
+.ant-menu-submenu-title {
+  margin: 0% !important; // Đảm bảo không có margin thừa
+  padding: 0% !important; // Đảm bảo không có padding thừa
+  font-weight: 500;
+}
+.ant-menu-submenu-title .submenu-title-child {
+  font-weight: 400;
+}
+.ant-menu-title-content {
+  margin: 2% !important; // Đảm bảo không có margin thừa
+  padding: 0% !important;
+  // Đảm bảo không có padding thừa
+}
+.menu-sidebar .ant-menu-item {
   cursor: pointer;
+  padding: 0% !important; // Đảm bảo không có padding thừa
+  margin: 0% !important; // Đảm bảo không có margin thừa
+
+  // Thay đổi kích thước chữ theo ý muốn
+  // Để làm cho tiêu đề đậm hơn
+}
+.ant-menu-item .ant-menu-title-content {
+  margin: -5% !important; // Đảm bảo không có margin thừa
+  padding: 0% !important; // Đảm bảo không có padding thừa
+}
+.ant-menu-item-icon {
+  margin: 5% !important; // Đảm bảo không có margin thừa
+  padding: 3% !important; // Đảm bảo không có padding thừa
+}
+.menu-sidebar .ant-menu-item,
+.menu-sidebar .ant-menu-item-group-title {
+  padding: 0% !important;
+  margin: 0% !important;
+}
+.menu-sidebar .ant-menu-item-group-title {
+  margin: 6% !important;
+}
+.menu-sidebar .ant-menu-item:hover {
+  background-color: #f0f2f5; // Màu nền khi hover
+}
+.menu-sidebar .ant-menu-item-selected {
+  background-color: #e6f7ff; // Màu nền khi được chọn
+  color: #1890ff; // Màu chữ khi được chọn
+}
+.menu-sidebar .ant-menu-item > a {
+  color: #000; // Màu chữ của menu
+  text-decoration: none; // Bỏ gạch chân
+}
+.menu-sidebar .ant-menu-item > a:hover {
+  color: #1890ff; // Màu chữ khi hover
+}
+.menu-sidebar .ant-menu-item > a:active {
+  color: #40a9ff; // Màu chữ khi nhấn
+}
+.menu-sidebar .ant-menu-item > a:focus {
+  color: #096dd9; // Màu chữ khi focus
+}
+.menu-sidebar .ant-menu-item {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.submenu-developer {
+  font-weight: none;
+  font-size: 12px;
+  text-align: left;
+}
+
+.submenu-title-child {
+  padding-right: 10px;
+}
+.folderopenoutlined {
+  margin-right: 5px;
+}
+li .ant-menu-item {
+  text-decoration: none;
 }

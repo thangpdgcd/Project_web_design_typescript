@@ -1,11 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import Icon, { FolderOpenOutlined, FileTextOutlined } from "@ant-design/icons";
+import { FolderOpenOutlined, FileTextOutlined } from "@ant-design/icons";
 import Introduction from "../../pages/introduction/index"; // Ensure the path is correct
 import { Link } from "react-router-dom"; // Import Link component
 import SubMenu from "antd/es/menu/SubMenu";
 import { Image } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 import "./index.scss"; // Adjust the path to your CSS file
 import logo from "../../assets/img/logo2.svg"; // Adjust the path to your logo file
 import iconsearch from "../../assets/img/icons8-search.svg";
@@ -25,12 +24,28 @@ import Spacing from "../../pages/spacing/spacing";
 import StrokeWidths from "../../pages/stroke_widths/stroke_widths";
 import Stypography from "../../pages/stypography/stypography";
 import ThemeDesigner from "../../pages/themedesigners/themedesigners";
+import React, { useState } from "react"; // Import React and useState hook
 // Adjust the path to your search icon file
 interface SidebarProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<React.ComponentType>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
+  const [isOpen, setIsOpen] = useState(false); // State to manage the open/close status of the submenu
+  const [openKeys, setOpenKeys] = useState<{ [key: string]: boolean }>({
+    sub1: false,
+    sub1_1: false, //developer
+    sub2: false,
+    sub1_2: false, //migrations
+    sub3: false,
+    sub3_1: false, //recipes
+  });
+  const handleToggle = (key: string) => {
+    setOpenKeys((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
   return (
     <BrowserRouter>
       <Layout style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
@@ -42,24 +57,51 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
             <img src={iconsearch} alt='search' className='iconsearch' />
             <input type='text' placeholder='Find Component...' style={{}} />
           </div>
-          <div className='menu-sidebar'>
+          <div className='menu-sidebar' style={{ marginTop: "20px" }}>
             <Menu mode='inline' theme='light' defaultSelectedKeys={["1"]}>
               {/* Introduction */}
               <SubMenu
+                className='text-decoration-none  relative mr-[-20px] '
                 key='sub1'
                 // icon={<DownOutlined />}
-                title={<span className='submenu-title'>Concepts</span>}>
+                title={
+                  <span className='submenu-title flex items-center gap-3'>
+                    <span
+                      className={`toggle ${
+                        openKeys.sub1 ? "open" : ""
+                      }`}></span>
+                    Concepts
+                  </span>
+                }
+                onTitleClick={() => handleToggle("sub1")} // xử lý toggle
+                // xử lý toggle
+              >
                 {/* B */}
                 <Menu.Item
+                  style={{
+                    paddingLeft: "20px",
+                    marginLeft: "10px",
+                    marginRight: "10px",
+                  }}
+                  className='ant-menu-title-content'
                   key='introduction'
                   onClick={() => setCurrentPage(() => Introduction)}
                   icon={<FileTextOutlined />}>
                   <Link to='/introduction'>Introduction</Link>
                 </Menu.Item>
+
                 <SubMenu
-                  key='sub1-1'
-                  title='Developer'
-                  icon={<FolderOpenOutlined />}>
+                  key='sub1_1'
+                  title={
+                    <span className='submenu-title-child flex items-center gap-3'>
+                      <span
+                        className={`toggle ${
+                          openKeys.sub1_1 ? "open" : ""
+                        }`}></span>
+                      <FolderOpenOutlined className='folderopenoutlined' />
+                      Developer
+                    </span>
+                  }>
                   <Menu.Item
                     key='quickstart'
                     onClick={() => setCurrentPage(() => QuickStart)}
@@ -117,9 +159,17 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                   </SubMenu>
                 </SubMenu>
                 <SubMenu
-                  key='sub1-2'
-                  icon={<FolderOpenOutlined />}
-                  title='Migration'>
+                  key='sub1_2'
+                  title={
+                    <span className='submenu-title-child flex items-center gap-3'>
+                      <span
+                        className={`toggle ${
+                          openKeys.sub1_2 ? "open" : ""
+                        }`}></span>
+                      <FolderOpenOutlined className='folderopenoutlined' />
+                      Migrations
+                    </span>
+                  }>
                   <Menu.Item key='3' icon={<FileTextOutlined />}>
                     <Link
                       to='/gettingstarted'
@@ -137,8 +187,16 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                 </SubMenu>
                 <SubMenu
                   key='sub1-3'
-                  icon={<FolderOpenOutlined />}
-                  title='Recipes'>
+                  title={
+                    <span className='submenu-title-child flex items-center gap-3'>
+                      <span
+                        className={`toggle   ${
+                          openKeys.sub1_3 ? "open" : ""
+                        }`}></span>
+                      <FolderOpenOutlined className='folderopenoutlined' />
+                      Recipes
+                    </span>
+                  }>
                   <Menu.Item key='4' icon={<FileTextOutlined />}>
                     <Link to='/quickstart'>Quickstart</Link>{" "}
                   </Menu.Item>
@@ -148,7 +206,16 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
               {/* Theme */}
               <SubMenu
                 key='sub2'
-                title={<span className='submenu-title'>Theme</span>}>
+                title={
+                  <span className='submenu-title flex items-center gap-3'>
+                    <span
+                      className={`toggle ${
+                        openKeys.sub2 || isOpen ? "open" : ""
+                      }`}></span>
+                    Theme
+                  </span>
+                }
+                onTitleClick={() => handleToggle("sub2")}>
                 <Menu.Item key='2' icon={<FileTextOutlined />}>
                   <Link
                     to='/borderradi'
@@ -211,7 +278,16 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                */}
               <SubMenu
                 key='sub3'
-                title={<span className='submenu-title'>Components</span>}>
+                title={
+                  <span className='submenu-title flex items-center gap-3'>
+                    <span
+                      className={`toggle ${
+                        openKeys.sub3 ? "open" : ""
+                      }`}></span>
+                    Components
+                  </span>
+                }
+                onTitleClick={() => handleToggle("sub3")}>
                 <Menu.Item key='3-1' icon={<FileTextOutlined />}>
                   <Link to='/accordion'>Accordion</Link>
                 </Menu.Item>
