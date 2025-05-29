@@ -1,11 +1,14 @@
 .introduction-container {
-  overflow-x: auto;
+  overflow-x: "hidden";
+  max-width: "100vw";
   height: 100vh !important;
+  margin-left: 93px;
   .header {
     .name {
       font-size: 40px;
-      font-weight: bold;
+      font-weight: 700;
       padding-top: 30px;
+      font-family: "Segoe UI";
     }
 
     .version {

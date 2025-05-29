@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layout } from "antd";
 import Sidebar from "./components/sidebar";
-import Introduction from "./pages/introduction";
+import Introduction from "./pages/introduction/introduction";
 import "./App.scss";
 const App = () => {
   //B1

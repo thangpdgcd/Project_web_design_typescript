@@ -13,8 +13,8 @@ import iconsearch from "../../assets/img/icons8-search.svg";
 import sidebarItems from "./datasidebar";
 
 // Pages – Concepts
-import Introduction from "../../pages/introduction";
-import QuickStart from "../../pages/quickstart";
+import Introduction from "../../pages/introduction/introduction";
+import QuickStart from "../../pages/quickstart/quickstart";
 import StylingComponent from "../../pages/stylingcomponents/styling_component";
 import PositioningComponents from "../../pages/positioningcomponents/positioning_components";
 

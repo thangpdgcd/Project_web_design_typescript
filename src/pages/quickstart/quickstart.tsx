@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./quickstart.scss";
 
 const QuickStart = () => {
   return (

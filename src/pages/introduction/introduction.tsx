@@ -1,8 +1,8 @@
-import "../../pages/introduction/index.scss";
 import banner from "../../assets/img/fluentui-wide-banner.png";
 import bannercontent from "../../assets/img/banner.svg";
 import bannercontenttokent from "../../assets/img/banner2.svg";
 import bannercontenttassets from "../../assets/img/banner3.svg";
+import "./introduction.scss";
 
 const Introduction = () => {
   return (
