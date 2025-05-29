@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, Layout } from "antd";
+import { Layout } from "antd";
 import Sidebar from "./components/sidebar";
 import Introduction from "./pages/introduction";
 import "./App.scss";

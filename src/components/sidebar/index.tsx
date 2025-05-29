@@ -1,77 +1,210 @@
+import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Image } from "antd";
 import { FolderOpenOutlined, FileTextOutlined } from "@ant-design/icons";
-import Introduction from "../../pages/introduction/index"; // Ensure the path is correct
-import { Link } from "react-router-dom"; // Import Link component
+import { Link } from "react-router-dom";
 import SubMenu from "antd/es/menu/SubMenu";
-import { Image } from "antd";
-import "./index.scss"; // Adjust the path to your CSS file
-import logo from "../../assets/img/logo2.svg"; // Adjust the path to your logo file
+
+// Assets
+import logo from "../../assets/img/logo2.svg";
 import iconsearch from "../../assets/img/icons8-search.svg";
+
+// Sidebar Data
+import sidebarItems from "./datasidebar";
+
+// Pages – Concepts
+import Introduction from "../../pages/introduction";
 import QuickStart from "../../pages/quickstart";
 import StylingComponent from "../../pages/stylingcomponents/styling_component";
-import positioningComponents from "../../pages/positioningcomponents/positioning_components";
+import PositioningComponents from "../../pages/positioningcomponents/positioning_components";
+
+// Pages – Server-Side Rendering
 import BasicSetup from "../../pages/basicsetup/basic_setup";
 import NestjsAppDirSetup from "../../pages/Nestjsappdirsetup/nesjs_app_dir_setup";
 import NestjsPagesSetup from "../../pages/nestjspages-setup/nestjs_pages_setup";
+import ReactRouterSetup from "../../pages/react_router_setup/react_router_setup";
+import LimitationsWithPortals from "../../pages/Limitationswithportals/limitations_with_potals";
+
+// Pages – Accessibility
+import AdvancedConfiguration from "../../pages/advanged_configuration/advangec_onfiguration";
+import AdvancedStylingTechniques from "../../pages/advangedstylingtechniques/advanced_styling_techniques";
+import BrowserSupportMatrix from "../../pages/browersuportmatrix";
+import BuildTimeStyles from "../../pages/building_time_style/building_time_style";
+import CustomizingWithSlots from "../../pages/customizing_component/customizing_component";
+import Theming from "../../pages/thememing/thememing";
+
+// Pages – Migration
 import GettingStarted from "../../pages/gettingstarted/getting_started";
 import KeeppingDesign from "../../pages/keepingdesignconsistent/keepping_design";
+import HandlingBreakingChanges from "../../pages/handlebreakingchange/handlebreakingchange";
+
+// Pages – Theme
 import BorderRadii from "../../pages/borderradi/border_radi";
 import Colors from "../../pages/colors/colors";
 import Fonts from "../../pages/fonts/fonts";
 import Shadows from "../../pages/shadows/shadows";
 import Spacing from "../../pages/spacing/spacing";
 import StrokeWidths from "../../pages/stroke_widths/stroke_widths";
-import Stypography from "../../pages/stypography/stypography";
-import ThemeDesigner from "../../pages/themedesigners/themedesigners";
-import React, { useState } from "react"; // Import React and useState hook
+import Typography from "../../pages/typography/typography";
+import MediaObjectPage from "../../pages/media_object/media_ocject";
 
-// Adjust the path to your search icon file
+// Pages – Components
+import Accordion from "../../pages/accordion/accordion";
+import Avatar from "../../pages/avatar/avatar";
+import Badge from "../../pages/badge/badge";
+import AvatarGroup from "../../pages/avatar_group/avatar_group";
+
+// Styles
+import "./index.scss";
+
 interface SidebarProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<React.ComponentType>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
-  //Fields search
-  let Sidebar = ([] = [
-    {
-      text: "Introduction",
-      link: "/introduction",
-    },
-    {
-      text: "Concepts",
-      link: "/concepts",
-    },
-    {
-      text: "Components",
-      link: "/components",
-    },
-  ]);
+  const renderMenuItems = (items: any[]): React.ReactNode => {
+    return items.map((item) => {
+      // Chỉ dùng childrenconcepts nếu item.key là "concept" (Developer)
+      const childItems =
+        item.key === "concepts"
+          ? item.children
+          : item.key === "developer"
+          ? item.childrenconcepts
+          : item.key === "migration"
+          ? item.childrenconcepts
+          : item.key === "recipes"
+          ? item.childrenconcepts
+          : item.key === "server-side-rendering" || item.key === "accessibility"
+          ? item.childrenconcepts_developer
+          : item.children;
 
-  const searchSidebar = () => {
-    Sidebar.filter((item) => {
-      console.log(item.link);
-      return item.link && item.link.startsWith("/");
+      if (childItems && Array.isArray(childItems)) {
+        return (
+          <SubMenu
+            key={item.key}
+            title={
+              <span className='submenu-title-component flex items-center gap-3'>
+                <span
+                  className={`toggle ${
+                    openKeys.includes(item.key) ? "open" : ""
+                  }`}
+                />
+                {item.key === "developer" && <FolderOpenOutlined />}
+                {item.key === "migration" && <FolderOpenOutlined />}
+                {item.key === "recipes" && <FolderOpenOutlined />}
+                {item.key === "server-side-rendering" && <FolderOpenOutlined />}
+                {item.key === "accessibility" && <FolderOpenOutlined />}
+                {item.title}
+              </span>
+            }>
+            {renderMenuItems(childItems)}
+          </SubMenu>
+        );
+      }
+
+      return (
+        <Menu.Item
+          key={item.key}
+          icon={<FileTextOutlined />}
+          onClick={() => {
+            const Component = componentMap[item.link];
+            if (Component) setCurrentPage(() => Component);
+          }}>
+          <Link to={item.link}>{item.title}</Link>
+        </Menu.Item>
+      );
     });
   };
 
-  const [isOpen, setIsOpen] = useState(false); // State to manage the open/close status of the submenu
+  // flatten sidebar items để tìm kiếm
+  const flattenSidebar = (
+    items: any[],
+    searchTerm: string,
+    results: any[] = []
+  ) => {
+    for (const item of items) {
+      const titleMatch = item.title
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const keyMatch = item.key
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
 
-  const [openKeys, setOpenKeys] = useState<{ [key: string]: boolean }>({
-    sub1: false,
-    sub1_1: false, //developer
-    sub2: false,
-    sub1_2: false, //migrations
-    sub3: false,
-    sub3_1: false, //recipes
-    sub1_1_2: false, //server-side rendering
-  });
+      if ((titleMatch || keyMatch) && item.link) {
+        results.push({
+          key: item.key,
+          title: item.title,
+          link: item.link,
+        });
+      }
 
-  const handleToggle = (key: string) => {
-    setOpenKeys((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
+      // Kiểm tra tất cả các kiểu children
+      const childLists = [
+        item.children,
+        item.childrenconcepts,
+        item.childrenconcepts_developer,
+      ];
+
+      childLists.forEach((childList) => {
+        if (childList && Array.isArray(childList)) {
+          flattenSidebar(childList, searchTerm, results);
+        }
+      });
+    }
+
+    return results;
+  };
+
+  //search
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Quản lý trạng thái submenu mở
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
+
+  // Kết quả lọc tìm kiếm
+  const filteredResults = searchTerm
+    ? flattenSidebar(sidebarItems, searchTerm)
+    : [];
+
+  // map link -> component
+  const componentMap: Record<string, React.ComponentType> = {
+    "/introduction": Introduction,
+    "/quickstart": QuickStart,
+    "/styling": StylingComponent,
+    "/positioning": PositioningComponents,
+    "/basicsetup": BasicSetup,
+    "/limitations": LimitationsWithPortals,
+    "/nest.js-appDir-setup": NestjsAppDirSetup,
+    "/nest.js-pages-setup": NestjsPagesSetup,
+    "/react-router": ReactRouterSetup, // Bạn cần đảm bảo component này đã được import
+    "/advanced-configuration": AdvancedConfiguration,
+    "/advanced-styling-techniques": AdvancedStylingTechniques,
+    "/browser-support-matrix": BrowserSupportMatrix,
+    "/build-time-styles": BuildTimeStyles,
+    "/fonts": Fonts,
+    "/customizing-with-slots": CustomizingWithSlots,
+    "/theming": Theming,
+    "/media-objects": MediaObjectPage,
+    "/borderradi": BorderRadii,
+    "/colors": Colors,
+    "/shadows": Shadows,
+    "/accordion": Accordion,
+    "/avatar": Avatar,
+    "/avatargroup": AvatarGroup,
+    "/typography": Typography,
+    "/getting-started": GettingStarted,
+    "/keeping-design-consistent": KeeppingDesign,
+    "/handling-breaking-changes": HandlingBreakingChanges,
+    "/spacing": Spacing,
+    "/stroke_widths": StrokeWidths,
+    "/badges": Badge,
+  };
+
+  // Xử lý toggle submenu
+  const onOpenChange = (keys: string[]) => {
+    // cho phép nhiều submenu mở cùng lúc, hoặc chỉ 1 submenu mở
+    // Ở đây ta cho phép nhiều submenu cùng mở
+    setOpenKeys(keys);
   };
 
   return (
@@ -79,301 +212,44 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
       <Layout style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
         <Layout.Sider width={280} theme='light' className='sidebar'>
           <div className='div-header'>
-            <div className='img-sidebar' style={{}}>
-              <Image width={150} style={{}} src={logo}></Image>
+            <div className='img-sidebar'>
+              <Image width={150} src={logo} />
             </div>
             <div className='search'>
               <img src={iconsearch} alt='search' className='iconsearch' />
               <input
-                onChange={(e) => searchSidebar()}
                 type='text'
                 placeholder='Find Component...'
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </div>
+
           <div className='menu-sidebar'>
-            <Menu mode='inline' theme='light' defaultSelectedKeys={["1"]}>
-              {/* Introduction */}
-              <SubMenu
-                className='text-decoration-none  relative mr-[-20px] '
-                key='sub1'
-                // icon={<DownOutlined />}
-                title={
-                  <span className='submenu-title flex items-center gap-3'>
-                    <span
-                      className={`toggle ${
-                        openKeys.sub1 ? "open" : ""
-                      }`}></span>
-                    Concepts
-                  </span>
-                }
-                onTitleClick={() => handleToggle("sub1")} // xử lý toggle
-                // xử lý toggle
-              >
-                {/* B */}
-                <Menu.Item
-                  className='ant-menu-title-content pl-[20px] ml-[10px] mr-[10px]'
-                  key='introduction'
-                  onClick={() => setCurrentPage(() => Introduction)}
-                  icon={<FileTextOutlined />}>
-                  <Link to='/introduction'>Introduction</Link>
-                </Menu.Item>
-
-                <SubMenu
-                  key='sub1_1'
-                  title={
-                    <span className='submenu-title-child flex items-center gap-3'>
-                      <span
-                        className={`toggle ${
-                          openKeys.sub1_1 ? "open" : ""
-                        }`}></span>
-                      <FolderOpenOutlined className='folderopenoutlined' />
-                      Developer
-                    </span>
-                  }>
+            {searchTerm ? (
+              <Menu mode='inline' theme='light'>
+                {filteredResults.map((item) => (
                   <Menu.Item
-                    key='quickstart'
-                    onClick={() => setCurrentPage(() => QuickStart)}
-                    icon={<FileTextOutlined />}>
-                    <Link to='/quickstart'>Quickstart</Link>{" "}
+                    key={item.key}
+                    icon={<FileTextOutlined />}
+                    onClick={() => {
+                      const Component = componentMap[item.link];
+                      if (Component) setCurrentPage(() => Component);
+                    }}>
+                    <Link to={item.link}>{item.title}</Link>
                   </Menu.Item>
-                  <Menu.Item key='3' icon={<FileTextOutlined />}>
-                    <Link
-                      to='/styling'
-                      onClick={() => setCurrentPage(() => StylingComponent)}>
-                      Styling Components
-                    </Link>{" "}
-                  </Menu.Item>
-                  <Menu.Item key='4' icon={<FileTextOutlined />}>
-                    <Link
-                      to='/positioning'
-                      onClick={() =>
-                        setCurrentPage(() => positioningComponents)
-                      }>
-                      Positioning Components
-                    </Link>{" "}
-                  </Menu.Item>
-                  <SubMenu
-                    key='sub1-1-2'
-                    title={
-                      <span className='submenu-title-child flex p-10 items-center gap-3'>
-                        <span
-                          className={`toggle ${
-                            openKeys.sub1_1_2 ? "open" : ""
-                          }`}></span>
-                        <FolderOpenOutlined className='folderopenoutlined' />
-                        Server-Side Rendering
-                      </span>
-                    }>
-                    <Menu.Item key='5' icon={<FileTextOutlined />}>
-                      <Link
-                        to='/basic'
-                        onClick={() => setCurrentPage(() => BasicSetup)}>
-                        Basic setup
-                      </Link>{" "}
-                    </Menu.Item>
-                    <Menu.Item key='6' icon={<FileTextOutlined />}>
-                      <Link
-                        to='/Limitations-with-portals'
-                        onClick={() => setCurrentPage(() => BasicSetup)}>
-                        Limitations with Portals
-                      </Link>{" "}
-                    </Menu.Item>
-                    <Menu.Item key='7' icon={<FileTextOutlined />}>
-                      <Link
-                        to='/Nest.js-appDir-setup'
-                        onClick={() => setCurrentPage(() => NestjsAppDirSetup)}>
-                        Nest.js appDir setup
-                      </Link>{" "}
-                    </Menu.Item>
-                    <Menu.Item key='7' icon={<FileTextOutlined />}>
-                      <Link
-                        to='/Nest.js-pages-setup'
-                        onClick={() => setCurrentPage(() => NestjsPagesSetup)}>
-                        Nest.js pages setup
-                      </Link>{" "}
-                    </Menu.Item>
-                  </SubMenu>
-                </SubMenu>
-                <SubMenu
-                  key='sub1_2'
-                  title={
-                    <span className='submenu-title-child flex items-center gap-3'>
-                      <span
-                        className={`toggle ${
-                          openKeys.sub1_2 ? "open" : ""
-                        }`}></span>
-                      <FolderOpenOutlined className='folderopenoutlined' />
-                      Migrations
-                    </span>
-                  }>
-                  <Menu.Item key='3' icon={<FileTextOutlined />}>
-                    <Link
-                      to='/gettingstarted'
-                      onClick={() => setCurrentPage(() => GettingStarted)}>
-                      Getting Started
-                    </Link>{" "}
-                  </Menu.Item>
-                  <Menu.Item key='3' icon={<FileTextOutlined />}>
-                    <Link
-                      to='/keepingdesign'
-                      onClick={() => setCurrentPage(() => KeeppingDesign)}>
-                      Keepping Design Consistent
-                    </Link>{" "}
-                  </Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key='sub1-3'
-                  title={
-                    <span className='submenu-title-child flex items-center gap-3'>
-                      <span
-                        className={`toggle   ${
-                          openKeys.sub1_3 ? "open" : ""
-                        }`}></span>
-                      <FolderOpenOutlined className='folderopenoutlined' />
-                      Recipes
-                    </span>
-                  }>
-                  <Menu.Item key='4' icon={<FileTextOutlined />}>
-                    <Link to='/quickstart'>Quickstart</Link>{" "}
-                  </Menu.Item>
-                </SubMenu>
-              </SubMenu>
-
-              {/* Theme */}
-              <SubMenu
-                key='sub2'
-                title={
-                  <span className='submenu-title flex items-center gap-3'>
-                    <span
-                      className={`toggle ${
-                        openKeys.sub2 || isOpen ? "open" : ""
-                      }`}></span>
-                    Theme
-                  </span>
-                }
-                onTitleClick={() => handleToggle("sub2")}>
-                <Menu.Item key='2' icon={<FileTextOutlined />}>
-                  <Link
-                    to='/borderradi'
-                    onClick={() => setCurrentPage(() => BorderRadii)}>
-                    BorderRadi
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key='2' icon={<FileTextOutlined />}>
-                  <Link
-                    to='/colors'
-                    onClick={() => setCurrentPage(() => Colors)}>
-                    Colors
-                  </Link>{" "}
-                </Menu.Item>
-
-                <Menu.Item key='3' icon={<FileTextOutlined />}>
-                  <Link to='/fonts' onClick={() => setCurrentPage(() => Fonts)}>
-                    Fonts
-                  </Link>{" "}
-                </Menu.Item>
-
-                <Menu.Item key='4' icon={<FileTextOutlined />}>
-                  <Link
-                    to='/shadows'
-                    onClick={() => setCurrentPage(() => Shadows)}>
-                    Shadows
-                  </Link>{" "}
-                </Menu.Item>
-                <Menu.Item key='5' icon={<FileTextOutlined />}>
-                  <Link
-                    to='/spacing'
-                    onClick={() => setCurrentPage(() => Spacing)}>
-                    Spacing
-                  </Link>{" "}
-                </Menu.Item>
-                <Menu.Item key='6' icon={<FileTextOutlined />}>
-                  <Link
-                    to='/stroke_widths'
-                    onClick={() => setCurrentPage(() => StrokeWidths)}>
-                    Stroke Widths
-                  </Link>{" "}
-                </Menu.Item>
-                <Menu.Item key='7' icon={<FileTextOutlined />}>
-                  <Link
-                    to='/stypography'
-                    onClick={() => setCurrentPage(() => Stypography)}>
-                    Stypography
-                  </Link>{" "}
-                </Menu.Item>
-                <Menu.Item key='8' icon={<FileTextOutlined />}>
-                  <Link
-                    to='/themedesigner'
-                    onClick={() => setCurrentPage(() => ThemeDesigner)}>
-                    Theme Designer
-                  </Link>{" "}
-                </Menu.Item>
-              </SubMenu>
-
-              {/* components
-               */}
-              <SubMenu
-                key='sub3'
-                title={
-                  <span className='submenu-title flex items-center gap-3'>
-                    <span
-                      className={`toggle ${
-                        openKeys.sub3 ? "open" : ""
-                      }`}></span>
-                    Components
-                  </span>
-                }
-                onTitleClick={() => handleToggle("sub3")}>
-                <Menu.Item key='3-1' icon={<FileTextOutlined />}>
-                  <Link to='/accordion'>Accordion</Link>
-                </Menu.Item>
-                <Menu.Item key='3-2' icon={<FileTextOutlined />}>
-                  <Link to='/avatar'>Avatar</Link>{" "}
-                </Menu.Item>
-                <Menu.Item key='3-3' icon={<FileTextOutlined />}>
-                  <Link to='/avatarGroup'>AvatarGroup</Link>{" "}
-                </Menu.Item>
-                <SubMenu
-                  key='sub1-1'
-                  title='Badge'
-                  icon={<FolderOpenOutlined />}>
-                  <Menu.Item key='2' icon={<FileTextOutlined />}>
-                    <Link to='/badge'>badge</Link>{" "}
-                  </Menu.Item>
-                  <Menu.Item key='3' icon={<FileTextOutlined />}>
-                    <Link to='/counter-badge'>Counterbadge</Link>{" "}
-                  </Menu.Item>
-                  <Menu.Item key='4' icon={<FileTextOutlined />}>
-                    <Link to='/presenceBadge'>PresenceBadge</Link>{" "}
-                  </Menu.Item>
-                </SubMenu>
-                <Menu.Item key='4-1' icon={<FileTextOutlined />}>
-                  <Link to='/breadcrumb'>Breadcrumb</Link>{" "}
-                </Menu.Item>
-                <SubMenu
-                  key='sub1-2'
-                  title='Badge'
-                  icon={<FolderOpenOutlined />}>
-                  <Menu.Item key='4-1' icon={<FileTextOutlined />}>
-                    <Link to='/button'>Button</Link>{" "}
-                  </Menu.Item>
-                  <Menu.Item key='4-2' icon={<FileTextOutlined />}>
-                    <Link to='/compoundbutton-'>CompoundButton</Link>{" "}
-                  </Menu.Item>
-                  <Menu.Item key='4-3' icon={<FileTextOutlined />}>
-                    <Link to='/menubuton'>MenuButon</Link>{" "}
-                  </Menu.Item>
-                  <Menu.Item key='4-4' icon={<FileTextOutlined />}>
-                    <Link to='/splitbutton'>SplitButton</Link>{" "}
-                  </Menu.Item>
-                  <Menu.Item key='4-4' icon={<FileTextOutlined />}>
-                    <Link to='/togglebutton'>ToggleButton</Link>{" "}
-                  </Menu.Item>
-                </SubMenu>
-              </SubMenu>
-            </Menu>{" "}
-            //đặt điều kiện menu
+                ))}
+              </Menu>
+            ) : (
+              <Menu
+                mode='inline'
+                theme='light'
+                openKeys={openKeys}
+                onOpenChange={onOpenChange}>
+                {renderMenuItems(sidebarItems)}
+              </Menu>
+            )}
           </div>
         </Layout.Sider>
       </Layout>

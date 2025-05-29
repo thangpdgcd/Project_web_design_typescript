@@ -1,4 +1,4 @@
-const Stypography = () => {
+const Typography = () => {
   return (
     <div className='stypography'>
       <h1>Stypography</h1>
@@ -6,4 +6,4 @@ const Stypography = () => {
     </div>
   );
 };
-export default Stypography;
+export default Typography;

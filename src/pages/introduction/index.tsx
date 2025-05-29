@@ -1,9 +1,5 @@
-import React from "react";
 import "../../pages/introduction/index.scss";
 import banner from "../../assets/img/fluentui-wide-banner.png";
-import { Layout } from "antd";
-import { Header, Content } from "antd/es/layout/layout";
-import { Image } from "antd/es";
 import bannercontent from "../../assets/img/banner.svg";
 import bannercontenttokent from "../../assets/img/banner2.svg";
 import bannercontenttassets from "../../assets/img/banner3.svg";

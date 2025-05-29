@@ -60,7 +60,7 @@
 //ant-design-scss
 .submenu-title {
   float: left;
-  font-size: 15px; // Thay đổi kích thước chữ theo ý muốn
+  font-size: 19px; // Thay đổi kích thước chữ theo ý muốn
   // Để làm cho tiêu đề đậm hơn
 }
 .submenu-title {
@@ -157,4 +157,12 @@
 }
 li .ant-menu-item {
   text-decoration: none;
+}
+.submenu-title-component {
+  font-weight: 200;
+  font-size: 16px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 4px; // khoảng cách giữa mũi tên và chữ
 }

@@ -1,5 +1,3 @@
-import exp from "constants";
-
 const Fonts = () => {
   return (
     <div>

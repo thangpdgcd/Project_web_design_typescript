@@ -1,6 +1,5 @@
-import React from "react";
 import "./index.scss";
-import banner from "../../assets/img/fluentui-wide-banner.png";
+
 const QuickStart = () => {
   return (
     <>

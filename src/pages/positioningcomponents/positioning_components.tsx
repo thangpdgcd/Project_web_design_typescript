@@ -16,7 +16,7 @@ export type PropDefinition = {
   defaultValue?: string | React.ReactNode;
 };
 
-const PositioningComponent: React.FC = () => {
+const PositioningComponent = () => {
   const showModal = () => {
     setIsModalOpen(true);
   };

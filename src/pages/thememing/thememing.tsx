@@ -1,4 +1,4 @@
-const ThemeDesigner = () => {
+const Thememing = () => {
   return (
     <div>
       <h1>Theme Designer</h1>
@@ -6,4 +6,4 @@ const ThemeDesigner = () => {
     </div>
   );
 };
-export default ThemeDesigner;
+export default Thememing;
