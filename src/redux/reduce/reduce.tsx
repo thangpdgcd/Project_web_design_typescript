@@ -7,6 +7,7 @@ const initialState: ColorState = {
   color: "black", // màu mặc định ban đầu
 };
 
+//nên thêm biến vào type
 type ColorAction = { type: "INCREMENT" } | { type: "DECREMENT" };
 
 const colorReducer = (
@@ -17,7 +18,7 @@ const colorReducer = (
     case "INCREMENT":
       return { ...state, color: "red" };
     case "DECREMENT":
-      return { ...state, color: "green" };
+      return { ...state, color: "blue" };
     default:
       return state;
   }

@@ -61,6 +61,7 @@ interface SidebarProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<React.ComponentType>>;
 }
 
+//props: truyền dữ liệu truyền sidebar qua app
 const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
   const renderMenuItems = (items: any[]): React.ReactNode => {
     return items.map((item) => {
