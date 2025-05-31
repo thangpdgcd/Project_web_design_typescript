@@ -18,7 +18,7 @@ const Introduction = () => {
             <img className='img-banner' src={banner} alt='' />
           </div>
           <div className='between'>What's New</div>
-          <div className='banner-content' style={{}}>
+          <div className='banner-content'>
             <img src={bannercontent} alt='' />
             <img src={bannercontenttokent} alt='' />
             <img src={bannercontenttassets} alt='' />

@@ -1,10 +1,11 @@
 .sidebar {
-  overflow-x: auto;
-  height: 100vh !important;
+  height: 100vh;
   position: sticky;
   inset-inline-start: 0;
   top: 0;
   bottom: 0;
+  min-width: none;
+  overflow-x: auto;
   .div-header {
     padding: 20px;
   }
@@ -12,7 +13,7 @@
     display: flex !important;
     justify-content: start !important;
     align-items: center;
-    margin-top: 10px;
+    padding-top: 10px;
     position: relative;
 
     .iconsearch {
@@ -26,16 +27,18 @@
   .search input {
     border: 1px solid rgb(219, 213, 213);
     height: 20px;
-    color: grey;
+    color: black;
     border-radius: 30px;
     outline: none;
     opacity: 1;
     padding: 10px 30px;
-    width: 300px;
-    height: 30px;
+    width: 210px;
+    height: 35px;
   }
+
   .search input::placeholder {
     display: flex;
+    color: grey;
   }
 }
 
@@ -62,12 +65,12 @@
   float: left;
   font-size: 19px; // Thay đổi kích thước chữ theo ý muốn
   // Để làm cho tiêu đề đậm hơn
-}
-.submenu-title {
+
   display: flex;
   align-items: center; // căn giữa mũi tên và chữ
   gap: 4px; // khoảng cách giữa mũi tên và chữ
 }
+
 .menu-sidebar {
   text-decoration: none;
   margin-left: 0% !important;
@@ -84,7 +87,6 @@
 .ant-menu-submenu-title {
   margin: 0% !important; // Đảm bảo không có margin thừa
   padding: 0% !important; // Đảm bảo không có padding thừa
-  font-weight: 500;
 }
 .ant-menu-submenu-title .submenu-title-child {
   font-weight: 400;
@@ -144,7 +146,6 @@
 }
 
 .submenu-developer {
-  font-weight: none;
   font-size: 12px;
   text-align: left;
 }
@@ -158,11 +159,24 @@
 li .ant-menu-item {
   text-decoration: none;
 }
+
 .submenu-title-component {
-  font-weight: 200;
-  font-size: 16px;
+  font-size: 13px;
   color: #000;
   display: flex;
   align-items: center;
-  gap: 4px; // khoảng cách giữa mũi tên và chữ
+  gap: 2px; // khoảng cách giữa mũi tên và chữ
+}
+
+.ant-menu-title-content {
+  font-size: 14px;
+}
+.submenu-title-lg {
+  font-size: 17px;
+
+  font-weight: 600;
+}
+.submenu-title-sm {
+  font-size: 14px;
+  gap: 5px;
 }

@@ -63,17 +63,16 @@ interface SidebarProps {
 
 //props: truyền dữ liệu truyền sidebar qua app
 const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
-  const renderMenuItems = (items: any[]): React.ReactNode => {
-    return items.map((item) => {
-      // Chỉ dùng childrenconcepts nếu item.key là "concept" (Developer)
+  const renderMenuItems = (items: any[]): React.ReactNode =>
+    items.map((item) => {
       const childItems =
-        item.key === "concepts"
+        item.key === "concepts" ||
+        item.key === "theme" ||
+        item.key === "components"
           ? item.children
-          : item.key === "developer"
-          ? item.childrenconcepts
-          : item.key === "migration"
-          ? item.childrenconcepts
-          : item.key === "recipes"
+          : item.key === "developer" ||
+            item.key === "migration" ||
+            item.key === "recipes"
           ? item.childrenconcepts
           : item.key === "server-side-rendering" || item.key === "accessibility"
           ? item.childrenconcepts_developer
@@ -84,17 +83,27 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
           <SubMenu
             key={item.key}
             title={
-              <span className='submenu-title-component flex items-center gap-3'>
+              <span
+                className={`submenu-title-component flex items-center gap-3 ${
+                  item.key === "concepts" ||
+                  item.key === "theme" ||
+                  item.key === "components"
+                    ? "submenu-title-lg"
+                    : "submenu-title-sm"
+                }`}>
                 <span
                   className={`toggle ${
                     openKeys.includes(item.key) ? "open" : ""
                   }`}
                 />
+
                 {item.key === "developer" && <FolderOpenOutlined />}
                 {item.key === "migration" && <FolderOpenOutlined />}
                 {item.key === "recipes" && <FolderOpenOutlined />}
                 {item.key === "server-side-rendering" && <FolderOpenOutlined />}
-                {item.key === "accessibility" && <FolderOpenOutlined />}
+                {item.key === "server-side-accessibility" && (
+                  <FolderOpenOutlined />
+                )}
                 {item.title}
               </span>
             }>
@@ -115,44 +124,28 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
         </Menu.Item>
       );
     });
-  };
 
   // flatten sidebar items để tìm kiếm
-  const flattenSidebar = (
-    items: any[],
-    searchTerm: string,
-    results: any[] = []
-  ) => {
-    for (const item of items) {
-      const titleMatch = item.title
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const keyMatch = item.key
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
 
-      if ((titleMatch || keyMatch) && item.link) {
-        results.push({
-          key: item.key,
-          title: item.title,
-          link: item.link,
-        });
+  const flattenSidebar = (items: any[], term: string, results: any[] = []) => {
+    for (const item of items) {
+      const match =
+        item.title?.toLowerCase().includes(term.toLowerCase()) ||
+        item.key?.toLowerCase().includes(term.toLowerCase());
+      if (match && item.link) {
+        results.push({ key: item.key, title: item.title, link: item.link });
       }
 
-      // Kiểm tra tất cả các kiểu children
-      const childLists = [
+      [
         item.children,
         item.childrenconcepts,
         item.childrenconcepts_developer,
-      ];
-
-      childLists.forEach((childList) => {
-        if (childList && Array.isArray(childList)) {
-          flattenSidebar(childList, searchTerm, results);
+      ].forEach((list) => {
+        if (Array.isArray(list)) {
+          flattenSidebar(list, term, results);
         }
       });
     }
-
     return results;
   };
 
