@@ -5,22 +5,24 @@
   top: 0;
   bottom: 0;
   min-width: none;
+  width: 280px;
   overflow-x: auto;
   .div-header {
     padding: 20px;
   }
   .search {
-    display: flex !important;
-    justify-content: start !important;
+   
+    justify-content: start;
     align-items: center;
     padding-top: 10px;
     position: relative;
 
     .iconsearch {
       position: absolute;
+      padding-top: 10px;
       width: 13px;
       margin-left: 10px;
-      color: grey !important; // T
+      color: grey ; // T
       line-height: 1.5;
     }
   }
@@ -59,67 +61,35 @@
 .ant-menu-submenu-arrow {
   display: none;
 }
-
 //ant-design-scss
 .submenu-title {
   float: left;
-  font-size: 19px; // Thay đổi kích thước chữ theo ý muốn
-  // Để làm cho tiêu đề đậm hơn
-
+  font-size: 19px; 
   display: flex;
-  align-items: center; // căn giữa mũi tên và chữ
-  gap: 4px; // khoảng cách giữa mũi tên và chữ
+  align-items: center; gap: 4px; 
 }
 
 .menu-sidebar {
   text-decoration: none;
-  margin-left: 0% !important;
+  margin-left: 0% ;
 }
 .menu-item {
   list-style: none; // loại bỏ dấu chấm (•)
   padding-left: 0; // loại bỏ thụt trái
   margin: 0;
 }
-.ant-menu {
-  padding: 0% !important; // Đảm bảo không có padding thừa
-  margin-left: 0% !important; // Đảm bảo không có margin thừa
-}
-.ant-menu-submenu-title {
-  margin: 0% !important; // Đảm bảo không có margin thừa
-  padding: 0% !important; // Đảm bảo không có padding thừa
-}
+
 .ant-menu-submenu-title .submenu-title-child {
   font-weight: 400;
 }
-.ant-menu-title-content {
-  margin: 2% !important; // Đảm bảo không có margin thừa
-  padding: 0% !important;
-  // Đảm bảo không có padding thừa
-}
 .menu-sidebar .ant-menu-item {
   cursor: pointer;
-  padding: 0% !important; // Đảm bảo không có padding thừa
-  margin: 0% !important; // Đảm bảo không có margin thừa
+  padding: 0% ; // Đảm bảo không có padding thừa
+  margin: 0% ; // Đảm bảo không có margin thừa
 
-  // Thay đổi kích thước chữ theo ý muốn
-  // Để làm cho tiêu đề đậm hơn
 }
-.ant-menu-item .ant-menu-title-content {
-  margin: -5% !important; // Đảm bảo không có margin thừa
-  padding: 0% !important; // Đảm bảo không có padding thừa
-}
-.ant-menu-item-icon {
-  margin: 5% !important; // Đảm bảo không có margin thừa
-  padding: 3% !important; // Đảm bảo không có padding thừa
-}
-.menu-sidebar .ant-menu-item,
-.menu-sidebar .ant-menu-item-group-title {
-  padding: 0% !important;
-  margin: 0% !important;
-}
-.menu-sidebar .ant-menu-item-group-title {
-  margin: 6% !important;
-}
+
+
 .menu-sidebar .ant-menu-item:hover {
   background-color: #f0f2f5; // Màu nền khi hover
 }
@@ -141,23 +111,13 @@
   color: #096dd9; // Màu chữ khi focus
 }
 .menu-sidebar .ant-menu-item {
-  list-style: none !important;
-  padding-left: 0 !important;
+  list-style: none ;
+  padding-left: 0 ;
 }
 
 .submenu-developer {
   font-size: 12px;
   text-align: left;
-}
-
-.submenu-title-child {
-  padding-right: 10px;
-}
-.folderopenoutlined {
-  margin-right: 5px;
-}
-li .ant-menu-item {
-  text-decoration: none;
 }
 
 .submenu-title-component {
@@ -169,14 +129,33 @@ li .ant-menu-item {
 }
 
 .ant-menu-title-content {
-  font-size: 14px;
+  font-size: 13px;
+  padding: 4px;
+  margin: 0% !important;
+  font-weight: 400;
 }
 .submenu-title-lg {
   font-size: 17px;
 
   font-weight: 600;
 }
+.menu
 .submenu-title-sm {
-  font-size: 14px;
+  font-size: 12px;
   gap: 5px;
+}
+
+.ant-menu-submenu-title
+{
+  padding: 0% !important;
+}
+.div-header
+{
+  padding-top: 20px;
+    padding-left: 19px;
+}
+.ant-menu-item
+{
+  padding-left: 20px !important ;
+  bottom: 0%;
 }
