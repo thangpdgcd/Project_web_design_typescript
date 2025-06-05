@@ -1,44 +1,30 @@
-import React, { useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import React, { useState,useRef,useEffect } from "react";
+import RecentlyOpened from "./layoutsearchsidebar";
 import { Layout, Menu, Image } from "antd";
 import { FolderOpenOutlined, FileTextOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import SubMenu from "antd/es/menu/SubMenu";
-
-// Assets
 import logo from "../../assets/img/logo2.svg";
 import iconsearch from "../../assets/img/icons8-search.svg";
-
-// Sidebar Data
 import sidebarItems from "./datasidebar";
-
-// Pages – Concepts
 import Introduction from "../../pages/introduction/introduction";
 import QuickStart from "../../pages/quickstart/quickstart";
 import StylingComponent from "../../pages/stylingcomponents/styling_component";
 import PositioningComponents from "../../pages/positioningcomponents/positioning_components";
-
-// Pages – Server-Side Rendering
 import BasicSetup from "../../pages/basicsetup/basic_setup";
 import NestjsAppDirSetup from "../../pages/Nestjsappdirsetup/nesjs_app_dir_setup";
 import NestjsPagesSetup from "../../pages/nestjspages-setup/nestjs_pages_setup";
 import ReactRouterSetup from "../../pages/react_router_setup/react_router_setup";
 import LimitationsWithPortals from "../../pages/Limitationswithportals/limitations_with_potals";
-
-// Pages – Accessibility
 import AdvancedConfiguration from "../../pages/advanged_configuration/advangec_onfiguration";
 import AdvancedStylingTechniques from "../../pages/advangedstylingtechniques/advanced_styling_techniques";
 import BrowserSupportMatrix from "../../pages/browersuportmatrix";
 import BuildTimeStyles from "../../pages/building_time_style/building_time_style";
 import CustomizingWithSlots from "../../pages/customizing_component/customizing_component";
 import Theming from "../../pages/thememing/thememing";
-
-// Pages – Migration
 import GettingStarted from "../../pages/gettingstarted/getting_started";
 import KeeppingDesign from "../../pages/keepingdesignconsistent/keepping_design";
 import HandlingBreakingChanges from "../../pages/handlebreakingchange/handlebreakingchange";
-
-// Pages – Theme
 import BorderRadii from "../../pages/borderradi/border_radi";
 import Colors from "../../pages/colors/colors";
 import Fonts from "../../pages/fonts/fonts";
@@ -47,14 +33,10 @@ import Spacing from "../../pages/spacing/spacing";
 import StrokeWidths from "../../pages/stroke_widths/stroke_widths";
 import Typography from "../../pages/typography/typography";
 import MediaObjectPage from "../../pages/media_object/media_ocject";
-
-// Pages – Components
 import Accordion from "../../pages/accordion/accordion";
 import Avatar from "../../pages/avatar/avatar";
 import Badge from "../../pages/badge/badge";
 import AvatarGroup from "../../pages/avatar_group/avatar_group";
-
-// Styles
 import "./index.scss";
 
 interface SidebarProps {
@@ -127,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
 
   // flatten sidebar items để tìm kiếm
 
-  const flattenSidebar = (items: any[], term: string, results: any[] = []) => {
+  const searchSidebar = (items: any[], term: string, results: any[] = []) => {
     for (const item of items) {
       const match =
         item.title?.toLowerCase().includes(term.toLowerCase()) ||
@@ -142,12 +124,28 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
         item.childrenconcepts_developer,
       ].forEach((list) => {
         if (Array.isArray(list)) {
-          flattenSidebar(list, term, results);
+          searchSidebar(list, term, results);
         }
       });
     }
     return results;
   };
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [recentlyOpened, setRecentlyOpened] = useState<any[]>([]);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setIsSearchFocused(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   //search
   const [searchTerm, setSearchTerm] = useState("");
@@ -155,9 +153,19 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
   // Quản lý trạng thái submenu mở
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
+  const handleItemClick = (item: any) => {
+    const Component = componentMap[item.link];
+    if (Component) {
+      setCurrentPage(() => Component);
+      setRecentlyOpened((prev) => [...prev, item]);
+      setSearchTerm("");
+      setIsSearchFocused(false);
+    }
+  };
+
   // Kết quả lọc tìm kiếm
   const filteredResults = searchTerm
-    ? flattenSidebar(sidebarItems, searchTerm)
+    ? searchSidebar(sidebarItems, searchTerm)
     : [];
 
   // map link -> component
@@ -201,22 +209,51 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     setOpenKeys(keys);
   };
 
-  return (
-    <BrowserRouter>
+  const handleClearHistory = () => {
+    setRecentlyOpened([]); // Clear the recently opened items
+  };
+
+  const handleBack = () => {
+    setIsSearchFocused(false); // Example of going back
+  };
+
+  return ( 
       <Layout style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
         <Layout.Sider width={280} theme='light' className='sidebar'>
           <div className='div-header'>
             <div className='img-sidebar'>
               <Image width={150} src={logo} />
             </div>
-            <div className='search'>
+            <div className='search' ref={searchRef}>
               <img src={iconsearch} alt='search' className='iconsearch' />
               <input
                 type='text'
                 placeholder='Find Component...'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
               />
+              {isSearchFocused && (
+                <div className='search-panel block'>
+                  <div className='search-title'>
+                    <RecentlyOpened
+                      items={recentlyOpened} // Pass the recently opened items
+                      onClear={handleClearHistory} // Pass the clear function
+                      onBack={handleBack} // Pass the back function
+                    />
+                  </div>
+                  {recentlyOpened.map((item, index) => (
+                    <div
+                      key={index}
+                      className='search-item '
+                      onClick={() => handleItemClick(item)}
+                    >
+                      <div className='search-item-title'>Docs</div>
+                      <div className='search-item-path'>{item.title}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -227,10 +264,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                   <Menu.Item
                     key={item.key}
                     icon={<FileTextOutlined />}
-                    onClick={() => {
-                      const Component = componentMap[item.link];
-                      if (Component) setCurrentPage(() => Component);
-                    }}>
+                    onClick={() => handleItemClick(item)}>
                     <Link to={item.link}>{item.title}</Link>
                   </Menu.Item>
                 ))}
@@ -247,7 +281,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
           </div>
         </Layout.Sider>
       </Layout>
-    </BrowserRouter>
   );
 };
 

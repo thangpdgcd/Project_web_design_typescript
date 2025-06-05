@@ -152,7 +152,7 @@
     height: auto;
   }
   [hidden]:where(:not([hidden="until-found"])) {
-    display: none !important;
+    display: none;
   }
 }
 @layer utilities {
