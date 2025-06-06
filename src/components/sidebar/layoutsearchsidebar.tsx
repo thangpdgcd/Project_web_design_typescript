@@ -13,6 +13,7 @@ interface RecentlyOpenedProps {
   onBack: () => void;
 }
 
+
 const RecentlyOpened: React.FC<RecentlyOpenedProps> = ({ items, onClear, onBack }) => {
   return (
     <div className="recently-opened grid ">
@@ -21,7 +22,6 @@ const RecentlyOpened: React.FC<RecentlyOpenedProps> = ({ items, onClear, onBack 
         {items.map((item, index) => (
           <li className="item" key={index}>
                 <FileTextOutlined className="file-icon" />
-                
             <div className="details">
               <div className="label">Docs</div>
               <div className="path">{item.path}</div>

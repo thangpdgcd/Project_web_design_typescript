@@ -93,7 +93,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
           </SubMenu>
         );
       }
-
       return (
         <Menu.Item
           key={item.key}

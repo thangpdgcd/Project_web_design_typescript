@@ -7,6 +7,7 @@ import "./introduction.scss";
 const Introduction = () => {
   return (
     <>
+      
       <div className='introduction-container'>
         <div className='header'>
           <p className='name'>Fluent UI React Components</p>
