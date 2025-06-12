@@ -6,10 +6,10 @@ import {
 } from "@ant-design/icons";
 import "./layoutsearchsidebar.scss";
 
+
 interface RecentlyOpenedItem {
   title: string;
   path: string;
-  children?: string;
 }
 
 interface RecentlyOpenedProps {
@@ -49,10 +49,12 @@ const RecentlyOpened: React.FC<RecentlyOpenedProps> = ({
               <div className='path'>
                 {item.path}{item.title}
               </div>
+
             </div>
           </li>
         ))}
       </ul>
+
 
       <div className='footer-actions'>
         <div className='action back' onClick={onBack}>
@@ -61,6 +63,7 @@ const RecentlyOpened: React.FC<RecentlyOpenedProps> = ({
           <span className='shortcut'>ESC</span>
         </div>
         <div className='action clear' onClick={onClear}>
+
           <DeleteOutlined />
           <span>Clear history</span>
         </div>

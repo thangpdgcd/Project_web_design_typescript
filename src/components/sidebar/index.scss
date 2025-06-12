@@ -11,6 +11,7 @@
     padding: 20px;
   }
   .search {
+
     justify-content: start;
     align-items: center;
     padding-top: 10px;
@@ -63,10 +64,12 @@
 //ant-design-scss
 .submenu-title {
   float: left;
+
   font-size: 19px;
   display: flex;
   align-items: center;
   gap: 4px;
+
 }
 
 .menu-sidebar {
@@ -87,6 +90,10 @@
   padding: 0%; // Đảm bảo không có padding thừa
   margin: 0%; // Đảm bảo không có margin thừa
 }
+
+
+
+
 
 .menu-sidebar .ant-menu-item:hover {
   background-color: #f0f2f5; // Màu nền khi hover
@@ -137,6 +144,7 @@
 
   font-weight: 600;
 }
+
 .menu .submenu-title-sm {
   font-size: 12px;
   gap: 5px;
@@ -183,6 +191,14 @@
   }
 }
 .ant-menu-item {
-  padding-left: 20px !important ;
-  bottom: 0%;
+
+.ant-menu-submenu-title
+{
+  padding: 0% !important;
 }
+.div-header
+{
+  padding-top: 20px;
+    padding-left: 19px;
+}
+
