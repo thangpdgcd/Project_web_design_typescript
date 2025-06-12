@@ -1,5 +1,5 @@
-import React, { useState,useRef,useEffect } from "react";
-import RecentlyOpened from "./layoutsearchsidebar";
+
+import React, { useState, useRef, useEffect } from "react";
 import { Layout, Menu, Image } from "antd";
 import { FolderOpenOutlined, FileTextOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -7,6 +7,11 @@ import SubMenu from "antd/es/menu/SubMenu";
 import logo from "../../assets/img/logo2.svg";
 import iconsearch from "../../assets/img/icons8-search.svg";
 import sidebarItems from "./datasidebar";
+
+import RecentlyOpened from "./layoutsearchsidebar";
+import docItems from "./datasearchsidebar";
+
+
 import Introduction from "../../pages/introduction/introduction";
 import QuickStart from "../../pages/quickstart/quickstart";
 import StylingComponent from "../../pages/stylingcomponents/styling_component";
@@ -156,7 +161,15 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     const Component = componentMap[item.link];
     if (Component) {
       setCurrentPage(() => Component);
-      setRecentlyOpened((prev) => [...prev, item]);
+
+
+      setRecentlyOpened((prev) => {
+        const exists = prev.find((i) => i.link === item.link);
+        if (exists) return prev; // không thêm nếu đã có
+        return [...prev, item];
+      });
+
+
       setSearchTerm("");
       setIsSearchFocused(false);
     }
@@ -164,8 +177,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
 
   // Kết quả lọc tìm kiếm
   const filteredResults = searchTerm
-    ? searchSidebar(sidebarItems, searchTerm)
-    : [];
+
+    ? searchSidebar(docItems, searchTerm)
+    : searchSidebar(sidebarItems, searchTerm);
+
 
   // map link -> component
   const componentMap: Record<string, React.ComponentType> = {
@@ -216,48 +231,46 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     setIsSearchFocused(false); // Example of going back
   };
 
-  return ( 
-      <Layout style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
-        <Layout.Sider width={280} theme='light' className='sidebar'>
-          <div className='div-header'>
-            <div className='img-sidebar'>
-              <Image width={150} src={logo} />
-            </div>
-            <div className='search' ref={searchRef}>
-              <img src={iconsearch} alt='search' className='iconsearch' />
-              <input
-                type='text'
-                placeholder='Find Component...'
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onFocus={() => setIsSearchFocused(true)}
-              />
-              {isSearchFocused && (
-                <div className='search-panel block'>
-                  <div className='search-title'>
-                    <RecentlyOpened
-                      items={recentlyOpened} // Pass the recently opened items
-                      onClear={handleClearHistory} // Pass the clear function
-                      onBack={handleBack} // Pass the back function
-                    />
-                  </div>
-                  {recentlyOpened.map((item, index) => (
-                    <div
-                      key={index}
-                      className='search-item '
-                      onClick={() => handleItemClick(item)}
-                    >
-                      <div className='search-item-title'>Docs</div>
-                      <div className='search-item-path'>{item.title}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
 
-          <div className='menu-sidebar'>
-            {searchTerm ? (
+  return (
+    <Layout style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
+      <Layout.Sider width={280} theme='light' className='sidebar'>
+        <div className='div-header'>
+          <div className='img-sidebar'>
+            <Image width={150} src={logo} />
+          </div>
+          <div className='search' ref={searchRef}>
+            <img src={iconsearch} alt='search' className='iconsearch' />
+            <input
+              type='text'
+              placeholder='Find Component...'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={() => setIsSearchFocused(true)}
+            />
+            {isSearchFocused && (
+              <div className='search-panel block'>
+                <div className='search-title'>
+                  <RecentlyOpened
+                    items={recentlyOpened}
+                    onClear={handleClearHistory}
+                    onBack={handleBack}
+                    isSearchFocused={isSearchFocused}
+                    searchTerm={searchTerm}
+                    filteredResults={filteredResults}
+                    onItemClick={handleItemClick}
+                  />
+                </div>
+              </div>
+            )}
+
+
+          </div>
+        </div>
+
+        <div className='menu-sidebar'>
+          {!isSearchFocused &&
+            (searchTerm ? (
               <Menu mode='inline' theme='light'>
                 {filteredResults.map((item) => (
                   <Menu.Item
@@ -276,10 +289,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                 onOpenChange={onOpenChange}>
                 {renderMenuItems(sidebarItems)}
               </Menu>
-            )}
-          </div>
-        </Layout.Sider>
-      </Layout>
+
+            ))}
+        </div>
+      </Layout.Sider>
+    </Layout>
+
   );
 };
 

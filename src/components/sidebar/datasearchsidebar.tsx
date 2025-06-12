@@ -1,4 +1,4 @@
-const sidebarItems = [
+const docItems = [
   {
     key: "concepts",
     title: "Concepts",
@@ -19,11 +19,7 @@ const sidebarItems = [
             key: "server-side-rendering",
             title: "Server-Side Rendering",
             childrenconcepts_developer: [
-              {
-                key: "basicsetup",
-                title: "Basic setup",
-                link: "/basicsetup"
-              },
+              { key: "basicsetup", title: "Basic setup", link: "/basicsetup" },
               {
                 key: "limitations",
                 title: "Limitations with Portals",
@@ -153,6 +149,4 @@ const sidebarItems = [
   },
 ];
 
-
-
-export default sidebarItems;
+export default docItems;
