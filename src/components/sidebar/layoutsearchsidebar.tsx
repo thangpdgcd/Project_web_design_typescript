@@ -16,30 +16,44 @@ interface RecentlyOpenedProps {
   items: RecentlyOpenedItem[];
   onClear: () => void;
   onBack: () => void;
+  isSearchFocused: boolean;
+  searchTerm: string;
+  filteredResults: RecentlyOpenedItem[];
+  onItemClick: (item: RecentlyOpenedItem) => void;
 }
 
 const RecentlyOpened: React.FC<RecentlyOpenedProps> = ({
   items,
   onClear,
   onBack,
+  searchTerm,
+  filteredResults,
+  onItemClick,
 }) => {
-  return (
-    <div className='recently-opened grid '>
-      <div className='section-title'>RECENTLY OPENED</div>
-      <ul className='item-list'>
-        {items.map((item, index) => (
-          <li className='item' key={index}>
-            <FileTextOutlined className='file-icon' />
+  const displayedItems = searchTerm ? filteredResults : items;
 
+  return (
+    <div className='recently-opened grid'>
+      <div className='section-title'>{(searchTerm = "RECENTLY OPENED")}</div>
+
+      <ul className='item-list'>
+        {displayedItems.map((item, index) => (
+          <li
+            className='item'
+            key={index}
+            onClick={() => onItemClick(item)}
+            style={{ cursor: "pointer" }}>
+            <FileTextOutlined className='file-icon' />
             <div className='details'>
-              <div className='label'>Docs</div>
+              {searchTerm && <div className='label'> Docs</div>}
               <div className='path'>
-                {item.path} {item.title}
+                {item.path}{item.title}
               </div>
             </div>
           </li>
         ))}
       </ul>
+
       <div className='footer-actions'>
         <div className='action back' onClick={onBack}>
           <LeftOutlined />

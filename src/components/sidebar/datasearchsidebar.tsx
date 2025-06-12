@@ -1,4 +1,4 @@
-const sidebarItems = [
+const docItems = [
   {
     key: "concepts",
     title: "Concepts",
@@ -149,6 +149,4 @@ const sidebarItems = [
   },
 ];
 
-
-
-export default sidebarItems;
+export default docItems;

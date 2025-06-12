@@ -11,7 +11,6 @@
     padding: 20px;
   }
   .search {
-   
     justify-content: start;
     align-items: center;
     padding-top: 10px;
@@ -22,7 +21,7 @@
       padding-top: 10px;
       width: 13px;
       margin-left: 10px;
-      color: grey ; // T
+      color: grey; // T
       line-height: 1.5;
     }
   }
@@ -64,14 +63,15 @@
 //ant-design-scss
 .submenu-title {
   float: left;
-  font-size: 19px; 
+  font-size: 19px;
   display: flex;
-  align-items: center; gap: 4px; 
+  align-items: center;
+  gap: 4px;
 }
 
 .menu-sidebar {
   text-decoration: none;
-  margin-left: 0% ;
+  margin-left: 0%;
 }
 .menu-item {
   list-style: none; // loại bỏ dấu chấm (•)
@@ -84,11 +84,9 @@
 }
 .menu-sidebar .ant-menu-item {
   cursor: pointer;
-  padding: 0% ; // Đảm bảo không có padding thừa
-  margin: 0% ; // Đảm bảo không có margin thừa
-
+  padding: 0%; // Đảm bảo không có padding thừa
+  margin: 0%; // Đảm bảo không có margin thừa
 }
-
 
 .menu-sidebar .ant-menu-item:hover {
   background-color: #f0f2f5; // Màu nền khi hover
@@ -111,8 +109,8 @@
   color: #096dd9; // Màu chữ khi focus
 }
 .menu-sidebar .ant-menu-item {
-  list-style: none ;
-  padding-left: 0 ;
+  list-style: none;
+  padding-left: 0;
 }
 
 .submenu-developer {
@@ -139,23 +137,52 @@
 
   font-weight: 600;
 }
-.menu
-.submenu-title-sm {
+.menu .submenu-title-sm {
   font-size: 12px;
   gap: 5px;
 }
 
-.ant-menu-submenu-title
-{
+.ant-menu-submenu-title {
   padding: 0% !important;
 }
-.div-header
-{
+.div-header {
   padding-top: 20px;
-    padding-left: 19px;
+  padding-left: 19px;
+  .sidebar {
+    width: 280px;
+    min-width: 220px;
+    background: #fff;
+
+    @media (max-width: 1024px) {
+      width: 220px;
+      min-width: 180px;
+    }
+
+    @media (max-width: 768px) {
+      width: 100vw;
+      min-width: 0;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+      height: 100vh;
+      overflow-y: auto;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (max-width: 480px) {
+      width: 100vw;
+      min-width: 0;
+      font-size: 14px;
+      .div-header {
+        .img-sidebar img {
+          width: 100px;
+        }
+      }
+    }
+  }
 }
-.ant-menu-item
-{
+.ant-menu-item {
   padding-left: 20px !important ;
   bottom: 0%;
 }

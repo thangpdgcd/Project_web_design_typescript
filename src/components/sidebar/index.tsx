@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import RecentlyOpened from "./layoutsearchsidebar";
+
 import { Layout, Menu, Image } from "antd";
 import { FolderOpenOutlined, FileTextOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -7,6 +7,8 @@ import SubMenu from "antd/es/menu/SubMenu";
 import logo from "../../assets/img/logo2.svg";
 import iconsearch from "../../assets/img/icons8-search.svg";
 import sidebarItems from "./datasidebar";
+import RecentlyOpened from "./layoutsearchsidebar";
+import docItems from "./datasearchsidebar";
 import Introduction from "../../pages/introduction/introduction";
 import QuickStart from "../../pages/quickstart/quickstart";
 import StylingComponent from "../../pages/stylingcomponents/styling_component";
@@ -171,8 +173,8 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
 
   // Kết quả lọc tìm kiếm
   const filteredResults = searchTerm
-    ? searchSidebar(sidebarItems, searchTerm)
-    : [];
+    ? searchSidebar(docItems, searchTerm)
+    : searchSidebar(sidebarItems, searchTerm);
 
   // map link -> component
   const componentMap: Record<string, React.ComponentType> = {
@@ -246,43 +248,39 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                     items={recentlyOpened}
                     onClear={handleClearHistory}
                     onBack={handleBack}
+                    isSearchFocused={isSearchFocused}
+                    searchTerm={searchTerm}
+                    filteredResults={filteredResults}
+                    onItemClick={handleItemClick}
                   />
                 </div>
-                {recentlyOpened.map((item, index) => (
-                  <div
-                    key={index}
-                    className='search-item '
-                    onClick={() => handleItemClick(item)}>
-                    <div className='search-item-title'>Docs</div>
-                    <div className='search-item-path'>{item.title}</div>
-                  </div>
-                ))}
               </div>
             )}
           </div>
         </div>
 
         <div className='menu-sidebar'>
-          {searchTerm ? (
-            <Menu mode='inline' theme='light'>
-              {filteredResults.map((item) => (
-                <Menu.Item
-                  key={item.key}
-                  icon={<FileTextOutlined />}
-                  onClick={() => handleItemClick(item)}>
-                  <Link to={item.link}>{item.title}</Link>
-                </Menu.Item>
-              ))}
-            </Menu>
-          ) : (
-            <Menu
-              mode='inline'
-              theme='light'
-              openKeys={openKeys}
-              onOpenChange={onOpenChange}>
-              {renderMenuItems(sidebarItems)}
-            </Menu>
-          )}
+          {!isSearchFocused &&
+            (searchTerm ? (
+              <Menu mode='inline' theme='light'>
+                {filteredResults.map((item) => (
+                  <Menu.Item
+                    key={item.key}
+                    icon={<FileTextOutlined />}
+                    onClick={() => handleItemClick(item)}>
+                    <Link to={item.link}>{item.title}</Link>
+                  </Menu.Item>
+                ))}
+              </Menu>
+            ) : (
+              <Menu
+                mode='inline'
+                theme='light'
+                openKeys={openKeys}
+                onOpenChange={onOpenChange}>
+                {renderMenuItems(sidebarItems)}
+              </Menu>
+            ))}
         </div>
       </Layout.Sider>
     </Layout>
