@@ -14,14 +14,16 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "antd": "^5.24.8",
+    "i18next": "^25.2.1",
     "postcss": "^8.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-i18next": "^15.5.3",
+    "react-intl": "^7.1.11",
     "react-router-dom": "^7.6.1",
     "react-scripts": "5.0.1",
     "redux": "^5.0.1",
     "tailwindcss": "^4.1.7",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -49,6 +51,8 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.87.0"
+    "@types/react-i18next": "^7.8.3",
+    "sass": "^1.87.0",
+    "typescript": "5.4"
   }
 }

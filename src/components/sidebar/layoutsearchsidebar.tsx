@@ -8,8 +8,8 @@ import "./layoutsearchsidebar.scss";
 
 interface RecentlyOpenedItem {
   title: string;
-  path: string;
-  children?: string;
+  link: string;
+  children?: RecentlyOpenedItem[];
 }
 
 interface RecentlyOpenedProps {
@@ -21,6 +21,34 @@ interface RecentlyOpenedProps {
   filteredResults: RecentlyOpenedItem[];
   onItemClick: (item: RecentlyOpenedItem) => void;
 }
+
+// Đệ quy hiển thị title và children (nếu có)
+const renderItems = (
+  items: RecentlyOpenedItem[],
+  onItemClick: (item: RecentlyOpenedItem) => void
+) => {
+  return items.map((item, index) => (
+    <li
+      className='item'
+      key={index}
+      onClick={() => onItemClick(item)}
+      style={{ cursor: "pointer" }}>
+      <FileTextOutlined className='file-icon' />
+      <div className='details'>
+        <div className='label'>Docs</div>
+        <div className='path'>
+          {item.title}
+          {item.link}
+        </div>
+      </div>
+      {item.children && item.children.length > 0 && (
+        <ul className='item-list-children'>
+          {renderItems(item.children, onItemClick)}
+        </ul>
+      )}
+    </li>
+  ));
+};
 
 const RecentlyOpened: React.FC<RecentlyOpenedProps> = ({
   items,
@@ -34,25 +62,11 @@ const RecentlyOpened: React.FC<RecentlyOpenedProps> = ({
 
   return (
     <div className='recently-opened grid'>
-      <div className='section-title'>{(searchTerm = "RECENTLY OPENED")}</div>
+      <div className='section-title'>
+        {searchTerm ? "SEARCH RESULTS" : "RECENTLY OPENED"}
+      </div>
 
-      <ul className='item-list'>
-        {displayedItems.map((item, index) => (
-          <li
-            className='item'
-            key={index}
-            onClick={() => onItemClick(item)}
-            style={{ cursor: "pointer" }}>
-            <FileTextOutlined className='file-icon' />
-            <div className='details'>
-              {searchTerm && <div className='label'> Docs</div>}
-              <div className='path'>
-                {item.path}{item.title}
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <ul className='item-list'>{renderItems(displayedItems, onItemClick)}</ul>
 
       <div className='footer-actions'>
         <div className='action back' onClick={onBack}>

@@ -10,22 +10,43 @@
 }
 
 /* content-container: Content bên phải */
-.content-container {
-  overflow-y: auto;
-  overflow-x: auto;
-  margin-left: 40px;
-  height: 100vh ;
 
-  /* Khoảng cách giữa sidebar và content */
-}
 /* Các kiểu CSS chung */
 body {
   font-family: "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.5; /* Hoặc 24px nếu bạn dùng px */
-  padding: 0% ;
+  padding: 0%;
 }
-
+.content-container {
+  transition: margin-left 0.3s;
+  // Khi sidebar mở
+  margin-left: 40px;
+}
+@media (max-width: 768px) {
+  .content-container {
+    margin-left: 0;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin-left: 40px;
+    height: 100vh;
+    transition: margin-left 0.3s;
+    width: 100vw;
+  }
+  .ant-layout-sider-children {
+    background-color: white;
+  }
+  .ant-layout-sider {
+    flex: 0 0 120px;
+    max-width: 180px;
+    min-width: 150px;
+    width: 200px;
+  }
+}
+.full-width {
+  margin-left: 0 !important;
+  width: 100vw !important;
+}
 h1,
 h2,
 h3,

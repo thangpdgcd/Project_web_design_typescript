@@ -16,39 +16,59 @@ import AdvancedStylingTechniques from "./pages/advangedstylingtechniques/advance
 import "./App.scss";
 
 const App = () => {
-  const [CurrentPage, setCurrentPage] = useState<React.ComponentType>(() => Introduction);
-  
+  const [CurrentPage, setCurrentPage] = useState<React.ComponentType>(
+    () => Introduction
+  );
 
   return (
-        <BrowserRouter>
-    <div style={{ display: "flex", height: "100vh" }}>
-      <Layout.Sider className='app-container' style={{ flex: "1" }}>
-        <div className='sidebar-container'>
-          <Sidebar setCurrentPage={setCurrentPage} />
-        </div>
-      </Layout.Sider>
-      <Layout.Content>
+    <BrowserRouter>
+      <div style={{ display: "flex", height: "100vh" }}>
+        {/* Nút chuyển đổi ngôn ngữ */}
+        <div
+          style={{ position: "fixed", top: 10, right: 20, zIndex: 999 }}></div>
+        <Layout.Sider className='app-container' style={{ flex: "1" }}>
+          <div className='sidebar-container'>
+            <Sidebar setCurrentPage={setCurrentPage} />
+          </div>
+        </Layout.Sider>
+        <Layout.Content>
           <div className='content-container'>
             <Routes>
-              <Route path="/" element={<Introduction />} />
-              <Route path="/quickstart" element={<QuickStart />} />
-              <Route path="/styling" element={<StylingComponent />} />
-              <Route path="/positioning" element={<PositioningComponents />} /> 
-              <Route path="/basicsetup" element={<BasicSetup />} />
-              <Route path="/limitations" element={<LimitationsWithPortals />} />
-              <Route path="/nest.js-appDir-setup" element={<NestjsAppDirSetup />} />
-              <Route path="/nest.js-pages-setup" element={<NestjsPagesSetup />} />
-              <Route path="/react-router" element={<ReactRouterSetup />} />
-              <Route path="/advanced-configuration" element={<AdvancedConfiguration />} />
-              <Route path="/advanced-styling-techniques" element={<AdvancedStylingTechniques />} />
+              <Route path='/' element={<Introduction />} />
+              <Route path='/quickstart' element={<QuickStart />} />
+              <Route path='/styling' element={<StylingComponent />} />
+              <Route path='/positioning' element={<PositioningComponents />} />
+              <Route path='/basicsetup' element={<BasicSetup />} />
+              <Route path='/limitations' element={<LimitationsWithPortals />} />
+              <Route
+                path='/nest.js-appDir-setup'
+                element={<NestjsAppDirSetup />}
+              />
+              <Route
+                path='/nest.js-pages-setup'
+                element={<NestjsPagesSetup />}
+              />
+              <Route path='/react-router' element={<ReactRouterSetup />} />
+              <Route
+                path='/advanced-configuration'
+                element={<AdvancedConfiguration />}
+              />
+              <Route
+                path='/advanced-styling-techniques'
+                element={<AdvancedStylingTechniques />}
+              />
               {/* Thêm các route khác tại đây */}
-              <Route path="*" element= {CurrentPage ? <CurrentPage /> : <div>Page not found</div>} />
+              <Route
+                path='*'
+                element={
+                  CurrentPage ? <CurrentPage /> : <div>Page not found</div>
+                }
+              />
             </Routes>
-    
-        </div>
-      </Layout.Content>
+          </div>
+        </Layout.Content>
       </div>
-      </BrowserRouter>
+    </BrowserRouter>
   );
 };
 

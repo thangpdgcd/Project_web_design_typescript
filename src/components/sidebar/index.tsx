@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-
 import { Layout, Menu, Image } from "antd";
 import { FolderOpenOutlined, FileTextOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -7,8 +6,10 @@ import SubMenu from "antd/es/menu/SubMenu";
 import logo from "../../assets/img/logo2.svg";
 import iconsearch from "../../assets/img/icons8-search.svg";
 import sidebarItems from "./datasidebar";
+
 import RecentlyOpened from "./layoutsearchsidebar";
 import docItems from "./datasearchsidebar";
+
 import Introduction from "../../pages/introduction/introduction";
 import QuickStart from "../../pages/quickstart/quickstart";
 import StylingComponent from "../../pages/stylingcomponents/styling_component";
@@ -45,8 +46,14 @@ interface SidebarProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<React.ComponentType>>;
 }
 
-//props: truyền dữ liệu truyền sidebar qua app
 const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [recentlyOpened, setRecentlyOpened] = useState<any[]>([]);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const renderMenuItems = (items: any[]): React.ReactNode =>
     items.map((item) => {
       const childItems =
@@ -95,21 +102,15 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
           </SubMenu>
         );
       }
-
       return (
         <Menu.Item
           key={item.key}
           icon={<FileTextOutlined />}
-          onClick={() => {
-            const Component = componentMap[item.link];
-            if (Component) setCurrentPage(() => Component);
-          }}>
+          onClick={() => handleItemClick(item)}>
           <Link to={item.link}>{item.title}</Link>
         </Menu.Item>
       );
     });
-
-  // flatten sidebar items để tìm kiếm
 
   const searchSidebar = (items: any[], term: string, results: any[] = []) => {
     for (const item of items) {
@@ -132,9 +133,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     }
     return results;
   };
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [recentlyOpened, setRecentlyOpened] = useState<any[]>([]);
-  const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -143,17 +141,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
         !searchRef.current.contains(event.target as Node)
       ) {
         setIsSearchFocused(false);
+        setMobileMenuOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  //search
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Quản lý trạng thái submenu mở
-  const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   const handleItemClick = (item: any) => {
     const Component = componentMap[item.link];
@@ -162,21 +155,20 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
 
       setRecentlyOpened((prev) => {
         const exists = prev.find((i) => i.link === item.link);
-        if (exists) return prev; // không thêm nếu đã có
+        if (exists) return prev;
         return [...prev, item];
       });
 
       setSearchTerm("");
       setIsSearchFocused(false);
+      setMobileMenuOpen(false);
     }
   };
 
-  // Kết quả lọc tìm kiếm
   const filteredResults = searchTerm
     ? searchSidebar(docItems, searchTerm)
     : searchSidebar(sidebarItems, searchTerm);
 
-  // map link -> component
   const componentMap: Record<string, React.ComponentType> = {
     "/introduction": Introduction,
     "/quickstart": QuickStart,
@@ -186,7 +178,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     "/limitations": LimitationsWithPortals,
     "/nest.js-appDir-setup": NestjsAppDirSetup,
     "/nest.js-pages-setup": NestjsPagesSetup,
-    "/react-router": ReactRouterSetup, // Bạn cần đảm bảo component này đã được import
+    "/react-router": ReactRouterSetup,
     "/advanced-configuration": AdvancedConfiguration,
     "/advanced-styling-techniques": AdvancedStylingTechniques,
     "/browser-support-matrix": BrowserSupportMatrix,
@@ -210,24 +202,25 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     "/badges": Badge,
   };
 
-  // Xử lý toggle submenu
   const onOpenChange = (keys: string[]) => {
-    // cho phép nhiều submenu mở cùng lúc, hoặc chỉ 1 submenu mở
-    // Ở đây ta cho phép nhiều submenu cùng mở
     setOpenKeys(keys);
   };
 
   const handleClearHistory = () => {
-    setRecentlyOpened([]); // Clear the recently opened items
+    setRecentlyOpened([]);
   };
 
   const handleBack = () => {
-    setIsSearchFocused(false); // Example of going back
+    setIsSearchFocused(false);
   };
 
+  // --- SỬA ĐỂ HAMBURGER ĐÓNG/MỞ TOÀN BỘ SIDEBAR ---
   return (
     <Layout style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
-      <Layout.Sider width={280} theme='light' className='sidebar'>
+      <Layout.Sider
+        width={280}
+        theme='light'
+        className={`sidebar${mobileMenuOpen ? " open" : ""}`}>
         <div className='div-header'>
           <div className='img-sidebar'>
             <Image width={150} src={logo} />
@@ -258,8 +251,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
             )}
           </div>
         </div>
-
-        <div className='menu-sidebar'>
+        <div className='menu-sidebar desktop-only'>
           {!isSearchFocused &&
             (searchTerm ? (
               <Menu mode='inline' theme='light'>
@@ -282,6 +274,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
               </Menu>
             ))}
         </div>
+        {/* Mobile/tablet menu: dùng chung .sidebar, không cần sidebar-menu-mobile nữa */}
       </Layout.Sider>
     </Layout>
   );
