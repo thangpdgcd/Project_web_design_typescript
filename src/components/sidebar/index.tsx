@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 38fac953682b2fa4ee9db17c4c7f1f644aa8b96c
 import React, { useState, useRef, useEffect } from "react";
 import { Layout, Menu, Image } from "antd";
 import { FolderOpenOutlined, FileTextOutlined } from "@ant-design/icons";
@@ -10,6 +14,10 @@ import sidebarItems from "./datasidebar";
 import RecentlyOpened from "./layoutsearchsidebar";
 import docItems from "./datasearchsidebar";
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 38fac953682b2fa4ee9db17c4c7f1f644aa8b96c
 import Introduction from "../../pages/introduction/introduction";
 import QuickStart from "../../pages/quickstart/quickstart";
 import StylingComponent from "../../pages/stylingcomponents/styling_component";
@@ -153,11 +161,13 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     if (Component) {
       setCurrentPage(() => Component);
 
+
       setRecentlyOpened((prev) => {
         const exists = prev.find((i) => i.link === item.link);
         if (exists) return prev;
         return [...prev, item];
       });
+
 
       setSearchTerm("");
       setIsSearchFocused(false);
@@ -166,9 +176,15 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
   };
 
   const filteredResults = searchTerm
+
     ? searchSidebar(docItems, searchTerm)
     : searchSidebar(sidebarItems, searchTerm);
 
+<<<<<<< HEAD
+=======
+
+  // map link -> component
+>>>>>>> 38fac953682b2fa4ee9db17c4c7f1f644aa8b96c
   const componentMap: Record<string, React.ComponentType> = {
     "/introduction": Introduction,
     "/quickstart": QuickStart,
@@ -214,7 +230,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     setIsSearchFocused(false);
   };
 
+<<<<<<< HEAD
   // --- SỬA ĐỂ HAMBURGER ĐÓNG/MỞ TOÀN BỘ SIDEBAR ---
+=======
+
+>>>>>>> 38fac953682b2fa4ee9db17c4c7f1f644aa8b96c
   return (
     <Layout style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
       <Layout.Sider
@@ -249,6 +269,8 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                 </div>
               </div>
             )}
+
+
           </div>
         </div>
         <div className='menu-sidebar desktop-only'>
@@ -272,11 +294,13 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
                 onOpenChange={onOpenChange}>
                 {renderMenuItems(sidebarItems)}
               </Menu>
+
             ))}
         </div>
         {/* Mobile/tablet menu: dùng chung .sidebar, không cần sidebar-menu-mobile nữa */}
       </Layout.Sider>
     </Layout>
+
   );
 };
 

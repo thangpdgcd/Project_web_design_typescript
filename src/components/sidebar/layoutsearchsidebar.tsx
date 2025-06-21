@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import "./layoutsearchsidebar.scss";
 
+
 interface RecentlyOpenedItem {
   title: string;
   link: string;
@@ -75,6 +76,7 @@ const RecentlyOpened: React.FC<RecentlyOpenedProps> = ({
           <span className='shortcut'>ESC</span>
         </div>
         <div className='action clear' onClick={onClear}>
+
           <DeleteOutlined />
           <span>Clear history</span>
         </div>
