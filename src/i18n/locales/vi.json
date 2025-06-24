@@ -1,0 +1,118 @@
+{
+  "language_toggle": "Tiếng Việt",
+  "not_found": "Không tìm thấy trang",
+  "sidebar": {
+    "search_placeholder": "Tìm thành phần...",
+    "concepts": "Khái niệm",
+    "introduction": "Giới thiệu",
+    "theme": "Chủ đề",
+    "components": "Thành phần",
+    "developer": "Nhà phát triển",
+    "quickstart": "Khởi động nhanh",
+    "styling": "Tạo kiểu",
+    "positioning": "Định vị",
+    "accessibility": "Khả năng tiếp cận",
+    "migration": "Di chuyển",
+    "recipes": "Mẫu",
+    "server-side-rendering": "Kết xuất phía máy chủ",
+    "server-side-accessibility": "Khả năng truy cập",
+    "recently_opened": "Đã mở gần đây",
+    "clear_history": "Xóa lịch sử",
+    "back": "Quay lại",
+    "accordion": "Accordion",
+    "avatar": "Ảnh đại diện",
+    "avatargroup": "Nhóm ảnh đại diện",
+    "badge": "Huy hiệu",
+    "badges": "Huy hiệu",
+    "sidebar_items": [
+      "Cài đặt cơ bản",
+      "Giới hạn với Cổng (Portals)",
+      "Cấu hình thư mục App trong Next.js",
+      "Cấu hình Pages trong Next.js",
+      "Cấu hình React Router 7 và Remix",
+      {
+        "Khả năng truy cập": [
+          "Cấu hình nâng cao",
+          "Kỹ thuật tạo kiểu nâng cao",
+          "Ma trận hỗ trợ trình duyệt",
+          "Tạo kiểu khi build",
+          "Tùy chỉnh thành phần với Slots",
+          "Tùy biến chủ đề"
+        ]
+      },
+      "Đối tượng Media",
+      {
+        "Bắt đầu": [
+          "Bắt đầu sử dụng",
+          "Giữ thiết kế nhất quán",
+          "Xử lý các thay đổi phá vỡ"
+        ]
+      }
+    ]
+  },
+  "introduction": {
+    "title": "Fluent UI React Components",
+    "version": "v9.64.0",
+    "whats_new": "Có gì mới",
+    "new_1": "Thành phần nhẹ giúp giảm kích thước gói và tăng hiệu năng.",
+    "new_2": "Hệ thống tokens mới giúp đồng bộ giữa các chủ đề hệ điều hành.",
+    "new_3": "Tài nguyên mới giúp cải thiện trải nghiệm M365 và Teams.",
+    "overview": "Tổng quan",
+    "overview_content_1": "Fluent UI React Components là tập hợp các thành phần giao diện người dùng và tiện ích kết hợp từ @fluentui/react và @fluentui/react-northstar.",
+    "overview_content_2": "Mỗi thành phần được thiết kế để tuân theo các tiêu chuẩn sau:",
+    "list": {
+      "customizable": "Tùy chỉnh: Thành phần sử dụng Fluent UI mặc định, dễ thay đổi theo thương hiệu và giao diện.",
+      "performance": "Hiệu suất: Tối ưu hóa hiệu năng hiển thị.",
+      "bundle_size": "Kích thước gói: Nhẹ, chỉ bao gồm những gì bạn cần.",
+      "accessibility": "Khả năng truy cập: Tuân thủ WCAG 2.1, được kiểm nghiệm kỹ.",
+      "design_code": "Thiết kế tới mã: Đồng bộ với hệ thống Fluent Design thông qua tokens."
+    },
+    "questions": "Câu hỏi?",
+    "contact": "Liên hệ nhóm Fluent UI React trên"
+  },
+  "quickstart": {
+    "install": "Cài đặt",
+    "install_desc": "Fluent UI nên được cài đặt như một phụ thuộc của ứng dụng.",
+    "setup": "Cấu hình",
+    "setup_desc_1": "Fluent UI sử dụng CSS-in-JS. Cần có một trình render để chèn CSS vào DOM khi cần.",
+    "setup_desc_2": "Thêm <FluentProvider /> tại gốc của ứng dụng và truyền theme.",
+    "react_18": "React 18",
+    "react_17": "React 17",
+    "usage": "Sử dụng",
+    "usage_desc": "Giờ bạn có thể sử dụng các thành phần Fluent UI.",
+    "strict_mode": "Strict mode",
+    "strict_mode_desc_1": "Chúng tôi biết có lỗi trong chế độ strict khi dùng Fluent UI trong React 18. Chúng chỉ xuất hiện trong strict mode và không ảnh hưởng đến ứng dụng.",
+    "strict_mode_desc_2": "Bạn có thể",
+    "strict_mode_link": "xem lỗi trên GitHub",
+    "strict_mode_desc_3": "và tìm hiểu cách chúng ảnh hưởng tới ứng dụng.",
+    "strict_mode_next": "SSR và Next.js:",
+    "strict_mode_desc_4": "Để tránh lỗi hydration, hãy tắt strict mode trong file next.config.js:"
+  },
+  "migration": {
+    "getting-started": "Bắt đầu sử dụng",
+    "keeping-design-consistent": "Giữ thiết kế nhất quán",
+    "handling-breaking-changes": "Xử lý các thay đổi phá vỡ"
+  },
+  "sidebar.borderradi": "Bo góc",
+  "sidebar.colors": "Màu sắc",
+  "sidebar.fonts": "Phông chữ",
+  "sidebar.shadows": "Bóng đổ",
+  "sidebar.stroke_widths": "Độ dày nét",
+  "sidebar.typography": "Kiểu chữ",
+  "sidebar.basicsetup": "Cài đặt cơ bản",
+  "sidebar.limitations": "Giới hạn với Portals",
+  "sidebar.appdirsetup": "Cấu hình thư mục App trong Next.js",
+  "sidebar.pagesetup": "Cấu hình Pages trong Next.js",
+  "sidebar.react-router": "Cấu hình React Router 7 và Remix",
+
+  "sidebar.advanced-configuration": "Cấu hình nâng cao",
+  "sidebar.advanced-styling-techniques": "Kỹ thuật tạo kiểu nâng cao",
+  "sidebar.browser-support-matrix": "Ma trận hỗ trợ trình duyệt",
+  "sidebar.build-time-styles": "Tạo kiểu khi build",
+  "sidebar.customizing-with-slots": "Tùy chỉnh thành phần với Slots",
+  "sidebar.theming": "Tùy biến chủ đề",
+  "sidebar.getting-started": "Bắt đầu sử dụng",
+  "sidebar.keeping-design-consistent": "Giữ thiết kế nhất quán",
+  "sidebar.handling-breaking-changes": "Xử lý các thay đổi phá vỡ",
+  "sidebar.media-objects": "Đối tượng Media"
+}
