@@ -1,0 +1,224 @@
+.introduction-container {
+  overflow-x: "hidden";
+  margin-left: 40px;
+
+  .header {
+    .name {
+      font-size: 40px;
+      font-weight: 700;
+      padding-top: 28px;
+      font-family: "Segoe UI";
+    }
+
+    .version {
+      color: rgb(117, 117, 117);
+      font-size: 24px;
+      font-weight: bold;
+      text-align: justify;
+    }
+  }
+}
+.content {
+  font-size: 20px;
+  font-weight: bold;
+  align-items: center;
+  margin: -300px;
+  margin-top: -6px;
+  margin-left: 3px;
+}
+.banner {
+  background-size: cover;
+  background-position: center;
+  margin-top: 30px;
+}
+
+.banner-content {
+  justify-content: flex-start;
+  display: flex;
+  gap: 200px;
+  padding-left: 10px;
+  .banner-content {
+    justify-content: flex-start;
+    display: flex;
+    gap: 200px;
+    padding-left: 10px;
+
+    // Laptop (<= 1200px)
+    @media (max-width: 1200px) {
+      gap: 80px;
+      display: flex;
+      padding-left: 6px;
+    }
+
+    // Tablet (<= 900px)
+    @media (max-width: 900px) {
+      gap: 40px;
+      flex-direction: column;
+      align-items: flex-start;
+      display: flex;
+      padding-left: 0;
+    }
+
+    // Mobile (<= 600px)
+    @media (max-width: 600px) {
+      gap: 16px;
+      flex-direction: column;
+      display: flex;
+      align-items: stretch;
+      padding-left: 0;
+      img {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+  // Laptop (<= 1200px)
+  @media (max-width: 1200px) {
+    gap: 80px;
+    .banner-content {
+      justify-content: flex-start;
+      display: flex;
+      gap: 200px;
+      padding-left: 10px;
+
+      // Laptop (<= 1200px)
+      @media (max-width: 1200px) {
+        gap: 80px;
+        padding-left: 6px;
+      }
+
+      // Tablet (<= 900px)
+      @media (max-width: 900px) {
+        gap: 24px;
+        padding-left: 0;
+      }
+
+      // Mobile (<= 600px)
+      @media (max-width: 600px) {
+        gap: 8px;
+        padding-left: 0;
+        flex-wrap: wrap; // Cho phép các phần tử tự xuống dòng nếu không đủ chỗ
+        align-items: flex-start;
+        img {
+          width: 48vw;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+    padding-left: 6px;
+  }
+
+  // Tablet (<= 900px)
+  @media (max-width: 900px) {
+    gap: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+  }
+
+  // Mobile (<= 600px)
+  @media (max-width: 600px) {
+    gap: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    padding-left: 0;
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+img {
+  border: none;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  border-radius: 10px;
+  background-color: rgb(245, 241, 241);
+}
+
+.between {
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  border: none;
+  text-align: justify;
+
+  padding-left: 10px;
+  font-weight: 500;
+  font-size: 22px;
+}
+.word {
+  gap: 100px;
+  display: flex;
+  font-weight: 400;
+  p {
+    font-size: 15px;
+    text-align: left;
+  }
+}
+.footer-content {
+  margin-top: 40px;
+  .overview {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .overview-content {
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 18px;
+  }
+}
+ul {
+  line-height: 1.6;
+  margin: 20px 37px;
+  font-weight: 400;
+  font-size: 15px;
+  li {
+    line-height: 2;
+  }
+}
+.feature-list {
+  list-style-type: disc;
+  padding-left: 20 px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.feature-list li strong {
+  display: inline-block;
+  margin-right: 5px;
+}
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.contact-section {
+  margin-top: 40px;
+  margin-bottom: 400px;
+}
+
+.contact-section h2 {
+  font-size: 24px;
+  font-weight: 550;
+  margin-bottom: 10px;
+}
+
+.contact-section p {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 450;
+}
+
+.contact-section a {
+  color: #0078d4; /* Fluent UI blue */
+  text-decoration: none;
+}
+
+.contact-section a:hover {
+  text-decoration: underline;
+}

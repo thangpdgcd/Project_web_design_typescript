@@ -1,0 +1,114 @@
+{
+  "language_toggle": "English",
+  "not_found": "Page not found",
+  "sidebar": {
+    "search_placeholder": "Find Component...",
+    "concepts": "Concepts",
+    "theme": "Theme",
+    "components": "Components",
+    "developer": "Developer",
+    "migration": "Migration",
+    "recipes": "Recipes",
+    "server-side-rendering": "Server-side Rendering",
+    "server-side-accessibility": "Accessibility",
+    "recently_opened": "Recently Opened",
+    "clear_history": "Clear History",
+    "back": "Back",
+    "styling": "Styling Components",
+    "positioning": "Positioning Components",
+    "badge": "Badge",
+    "badges": "Badge",
+    "accordion": "Accordion",
+    "avatar": "Avatar",
+    "avatargroup": "AvatarGroup",
+    "sidebar_items": [
+      "Basic setup",
+      "Limitations with Portals",
+      "Next.js App Directory Setup",
+      "Next.js Pages Setup",
+      "React Router Setup 7 and Remix setup",
+      {
+        "Accessibility": [
+          "Advanced Configuration",
+          "Advanced Styling Techniques",
+          "Browser Support Matrix",
+          "Build time styles",
+          "Customizing Components with Slots",
+          "Theming"
+        ]
+      },
+      "Media Objects",
+      {
+        "Getting Started": [
+          "Getting Started",
+          "Keeping Design Consistent",
+          "Handling Breaking Changes"
+        ]
+      }
+    ]
+  },
+  "introduction": {
+    "title": "Fluent UI React Components",
+    "version": "v9.64.0",
+    "whats_new": "What's New",
+    "new_1": "Lightweight components for smaller bundle size and faster performance.",
+    "new_2": "New tokens system for frictionless cohesion across OS themes.",
+    "new_3": "New assets to level up Teams add-ins and M365 experiences.",
+    "overview": "Overview",
+    "overview_content_1": "Fluent UI React Components is a set of UI components and utilities from the convergence of @fluentui/react and @fluentui/react-northstar.",
+    "overview_content_2": "Each component is designed to adhere to the following standards:",
+    "list": {
+      "customizable": "Customizable: Components styled with Fluent UI by default, but easy to customize with your own brand and theme.",
+      "performance": "Performance: Optimized for high rendering performance.",
+      "bundle_size": "Bundle Size: Refactored and lightweight components that include only the packages and dependencies you need.",
+      "accessibility": "Accessibility: Compliant with WCAG 2.1 and tested by trusted accessibility experts.",
+      "design_code": "Design to Code: Stay aligned with Fluent Design Language updates through Design Tokens."
+    },
+    "questions": "Questions?",
+    "contact": "Reach out to the Fluent UI React team on"
+  },
+  "quickstart": {
+    "install": "Install",
+    "install_desc": "Fluent UI should be installed as a dependency of your app.",
+    "setup": "Setup",
+    "setup_desc_1": "Fluent UI components are styled using CSS in JS. This technique requires a style renderer which inserts CSS into DOM when needed.",
+    "setup_desc_2": "Place a <FluentProvider /> at the root of your app and pass theme as a prop.",
+    "react_18": "React 18",
+    "react_17": "React 17",
+    "usage": "Usage",
+    "usage_desc": "That is it. You can now use Fluent UI components in your app.",
+    "strict_mode": "Strict mode",
+    "strict_mode_desc_1": "We are aware of some strict mode bugs when using Fluent UI in React 18. These bugs only show up in strict mode, and they will not stop the rest of your app from running.",
+    "strict_mode_desc_2": "You can",
+    "strict_mode_link": "find the bugs on GitHub",
+    "strict_mode_desc_3": "and learn how they will affect your application.",
+    "strict_mode_next": "SSR and Next.js:",
+    "strict_mode_desc_4": "To avoid strict mode hydration issues, you can disable strict mode in your Next.js app by adding the following configuration to your next.config.js file:"
+  },
+  "migration": {
+    "getting-started": "Getting Started",
+    "keeping-design-consistent": "Keeping Design Consistent",
+    "handling-breaking-changes": "Handling Breaking Changes"
+  },
+  "sidebar.borderradi": "Border Radius",
+  "sidebar.colors": "Colors",
+  "sidebar.fonts": "Fonts",
+  "sidebar.shadows": "Shadows",
+  "sidebar.stroke_widths": "Stroke Widths",
+  "sidebar.typography": "Typography",
+  "sidebar.basicsetup": "Basic Setup",
+  "sidebar.limitations": "Limitations with Portals",
+  "sidebar.appdirsetup": "App Directory Setup in Next.js",
+  "sidebar.pagesetup": "Pages Setup in Next.js",
+  "sidebar.react-router": "React Router 7 and Remix Setup",
+  "sidebar.advanced-configuration": "Advanced Configuration",
+  "sidebar.advanced-styling-techniques": "Advanced Styling Techniques",
+  "sidebar.browser-support-matrix": "Browser Support Matrix",
+  "sidebar.build-time-styles": "Build-time Styling",
+  "sidebar.customizing-with-slots": "Customizing Components with Slots",
+  "sidebar.theming": "Theming",
+  "sidebar.getting-started": "Getting Started",
+  "sidebar.keeping-design-consistent": "Keeping Design Consistent",
+  "sidebar.handling-breaking-changes": "Handling Breaking Changes",
+  "sidebar.media-objects": "Media Objects"
+}
